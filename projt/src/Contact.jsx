@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import "./Contact.css";
+import { sendContactMessage } from "./api/contact.api";
 
 // Composant pour le titre animé
 function TitreAnimeContact({ texte }) {
   return (
     <h1 className="titre-contact-anime">
-      {texte.split('').map((lettre, index) => (
-        <span 
-          key={index} 
+      {texte.split("").map((lettre, index) => (
+        <span
+          key={index}
           className="lettre-animee-contact"
           style={{ animationDelay: `${index * 0.1}s` }}
         >
-          {lettre === ' ' ? '\u00A0' : lettre}
+          {lettre === " " ? "\u00A0" : lettre}
         </span>
       ))}
     </h1>
@@ -28,7 +29,9 @@ function InfoContact({ icone, titre, contenu, lien }) {
       <div className="contenu-contact">
         <h4>{titre}</h4>
         {lien ? (
-          <a href={lien} className="lien-contact">{contenu}</a>
+          <a href={lien} className="lien-contact">
+            {contenu}
+          </a>
         ) : (
           <p>{contenu}</p>
         )}
@@ -39,35 +42,34 @@ function InfoContact({ icone, titre, contenu, lien }) {
 
 function Contact() {
   const [formData, setFormData] = useState({
-    nom: '',
-    prenom: '',
-    email: '',
-    message: ''
+    nom: "",
+    prenom: "",
+    email: "",
+    message: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState('');
+  const [submitMessage, setSubmitMessage] = useState("");
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Simulation d'envoi (remplacer par vraie logique d'envoi)
-    setTimeout(() => {
-      setSubmitMessage('Message envoyé avec succès ! Nous vous répondrons bientôt.');
-      setFormData({ nom: '', prenom: '', email: '', message: '' });
-      setIsSubmitting(false);
-      
-      // Effacer le message après 5 secondes
-      setTimeout(() => setSubmitMessage(''), 5000);
-    }, 2000);
+    try {
+      const result = await sendContactMessage(formData);
+      setSubmitMessage("Votre message a été envoyé avec succès !");
+      setFormData({ nom: "", prenom: "", email: "", message: "" });
+    } catch (error) {
+      setSubmitMessage("Une erreur est survenue. Veuillez réessayer.");
+    }
   };
 
   return (
@@ -76,7 +78,8 @@ function Contact() {
       <div className="contact-header">
         <TitreAnimeContact texte="Contactez-nous" />
         <p className="sous-titre-contact">
-          Restez en contact avec les talents, les recruteurs et les opportunités qui comptent
+          Restez en contact avec les talents, les recruteurs et les opportunités
+          qui comptent
         </p>
       </div>
 
@@ -104,7 +107,7 @@ function Contact() {
               <span className="lettre-animee-form">g</span>
               <span className="lettre-animee-form">e</span>
             </h2>
-            
+
             <form onSubmit={handleSubmit} className="formulaire-contact">
               <div className="groupe-champs">
                 <div className="champ-wrapper">
@@ -132,7 +135,7 @@ function Contact() {
                   />
                 </div>
               </div>
-              
+
               <div className="champ-wrapper">
                 <label htmlFor="email">Email</label>
                 <input
@@ -145,7 +148,7 @@ function Contact() {
                   placeholder="votre.email@exemple.com"
                 />
               </div>
-              
+
               <div className="champ-wrapper">
                 <label htmlFor="message">Message</label>
                 <textarea
@@ -158,10 +161,10 @@ function Contact() {
                   placeholder="Écrivez votre message ici..."
                 ></textarea>
               </div>
-              
-              <button 
-                type="submit" 
-                className={`btn-envoyer ${isSubmitting ? 'submitting' : ''}`}
+
+              <button
+                type="submit"
+                className={`btn-envoyer ${isSubmitting ? "submitting" : ""}`}
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
@@ -176,7 +179,7 @@ function Contact() {
                   </>
                 )}
               </button>
-              
+
               {submitMessage && (
                 <div className="message-succes">
                   <span className="icone-succes">✅</span>
@@ -208,32 +211,32 @@ function Contact() {
               <span className="lettre-animee-info">n</span>
               <span className="lettre-animee-info">s</span>
             </h2>
-            
+
             <div className="liste-infos-contact">
-              <InfoContact 
+              <InfoContact
                 icone="📞"
                 titre="Téléphone"
                 contenu="+212 6 79 01 34 59"
                 lien="tel:+212679013459"
               />
-              <InfoContact 
+              <InfoContact
                 icone="📧"
                 titre="Email"
                 contenu="Dev_job@gmail.com"
                 lien="mailto:Dev_job@gmail.com"
               />
-              <InfoContact 
+              <InfoContact
                 icone="📍"
                 titre="Adresse"
                 contenu="Casablanca, Maroc"
               />
-              <InfoContact 
+              <InfoContact
                 icone="🕒"
                 titre="Horaires"
                 contenu="Lun - Ven : 9h00 - 18h00"
               />
             </div>
-            
+
             {/* Section réseaux sociaux */}
             <div className="section-reseaux">
               <h3>Suivez-nous</h3>

@@ -14,10 +14,11 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Routes
 app.use("/candidatures", require("./routes/candidatures"));
-app.use("/contact", require("./routes/contact"));
+app.use("/api/contact", require("./routes/contact"));
 
 // Connexion MongoDB
-mongoose.connect(process.env.MONGODB_URI)
+mongoose
+  .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log("✅ Connecté à MongoDB");
     app.listen(process.env.PORT || 5000, () =>

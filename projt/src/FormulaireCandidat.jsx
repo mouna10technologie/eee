@@ -1,5 +1,6 @@
 import "./FormulaireCandidat.css";
 import React, { useState } from "react";
+import { createCandidat } from "./api/formulaireCandidat.api";
 
 function FormulaireCandidat() {
   const [formData, setFormData] = useState({
@@ -18,6 +19,8 @@ function FormulaireCandidat() {
   });
 
   const [cvFile, setCvFile] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,39 +34,57 @@ function FormulaireCandidat() {
     setCvFile(e.target.files[0]);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitMessage("");
 
-    const candidat = {
-      ...formData,
-      competences: formData.competences.split(",").map((comp) => comp.trim()),
-    };
+    try {
+      const candidat = {
+        ...formData,
+        competences: formData.competences.split(",").map((comp) => comp.trim()),
+      };
 
-    const formDataToSend = new FormData();
-    for (const key in candidat) {
-      formDataToSend.append(key, candidat[key]);
-    }
+      const formDataToSend = new FormData();
+      for (const key in candidat) {
+        if (Array.isArray(candidat[key])) {
+          formDataToSend.append(key, JSON.stringify(candidat[key]));
+        } else {
+          formDataToSend.append(key, candidat[key]);
+        }
+      }
 
-    if (cvFile) {
-      formDataToSend.append("cv", cvFile);
-    }
+      if (cvFile) {
+        formDataToSend.append("cv", cvFile);
+      }
 
-    fetch("http://localhost:5000/candidats", {
-      method: "POST",
-      body: formDataToSend,
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error("Erreur lors de l'envoi");
-        return res.json();
-      })
-      .then((data) => {
-        alert("Candidat ajouté avec succès !");
-        console.log(data);
-      })
-      .catch((err) => {
-        console.error(err);
-        alert("Erreur lors de l'envoi du candidat.");
+      const result = await createCandidat(formDataToSend);
+      setSubmitMessage("Candidat ajouté avec succès !");
+      
+      // Reset form
+      setFormData({
+        nom: "",
+        prenom: "",
+        age: "",
+        diplome: "",
+        experience: "",
+        salaire: "",
+        photo: "",
+        competences: "",
+        localisation: "",
+        github: "",
+        portfolio: "",
+        telephone: "",
       });
+      setCvFile(null);
+      
+      console.log("Candidat créé:", result);
+    } catch (error) {
+      console.error("Erreur:", error);
+      setSubmitMessage("Erreur lors de l'envoi du candidat: " + error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -203,7 +224,15 @@ function FormulaireCandidat() {
           />
         </div>
 
-        <button type="submit">Envoyer</button>
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Envoi en cours..." : "Envoyer"}
+        </button>
+
+        {submitMessage && (
+          <div className={`message ${submitMessage.includes("succès") ? "success" : "error"}`}>
+            {submitMessage}
+          </div>
+        )}
       </form>
     </div>
   );
