@@ -1,0 +1,7 @@
+@import './OptimizedCards.css';
+
+/* Styles spécifiques aux cartes principales si nécessaire */
+.div_cartes img {
+  border-radius: 12px;
+}
+
