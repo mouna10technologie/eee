@@ -7,19 +7,16 @@ import Header from "./Header";
 import "./App.css";
 
 function App() {
-
-
   return (
-    <>
     <BrowserRouter>
-    <AppRoutes/>
-      <Header />
-      
-    
-    
-      <Footer />
-      </BrowserRouter>
-    </>
+      <div className="app">
+        <Header />
+        <main className="main-content">
+          <AppRoutes />
+        </main>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 export default App;
