@@ -1,21 +1,6 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "projt/dist"
-      }
-    }
-  ],
-  "routes": [
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ]
+  "buildCommand": "cd projt && npm install && npx vite build --base=./",
+  "outputDirectory": "projt/dist",
+  "installCommand": "npm install --prefix projt",
+  "framework": null
 }
