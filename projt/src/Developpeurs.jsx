@@ -209,6 +209,7 @@ function Developpeurs() {
         </h3>
       </div>
       <div className="button_candidat">
+        <span className="hand-icon" aria-hidden="true" title="Cliquez ici">👉</span>
         <button onClick={() => navigate("/formulaire")}>
           ➕ Ajouter un candidat
         </button>

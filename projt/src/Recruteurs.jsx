@@ -2,13 +2,16 @@ import "./Recruteurs.css";
 function CarteRecruteurs1({ image, lien }) {
   return (
     <div className="div_reruteurs1">
-      <a href={lien} target="_blank" rel="noopener noreferrer">
+      <a href={lien} target="_blank" rel="noopener noreferrer" className="img-link">
         <img
           src={image}
           alt="image des sites freelance"
           width="100px"
           height="100px"
         />
+      </a>
+      <a href={lien} target="_blank" rel="noopener noreferrer" className="visit-text">
+        cliquer pour visiter
       </a>
     </div>
   );

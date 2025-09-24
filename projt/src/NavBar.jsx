@@ -5,7 +5,7 @@ function NavBar() {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <div className="logo">
+        <Link to="/Futuriste" className="logo" aria-label="Aller à la page Futuriste">
           <span className="logo-icon">
             <img
               src="/LogoDev-job2.jpg"
@@ -18,7 +18,7 @@ function NavBar() {
             <span className="logo-dev">Dev</span>
             <span className="logo-job">Job</span>
           </span>
-        </div>
+        </Link>
       </div>
 
       <ul className="navbar-menu">

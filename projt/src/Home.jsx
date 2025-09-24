@@ -239,30 +239,45 @@ function Home() {
           </Link>
         </div>
 
+        {/* Nouveaux boutons sous les boutons existants */}
+        <div className="buttons-section secondary-buttons">
+          <Link
+            to="/Actualites_dev"
+            className="home-button actualites-button"
+          >
+            Actualités
+          </Link>
+          <Link to="/IA" className="home-button ia-button">
+            IA
+          </Link>
+        </div>
+
         <div className="cards-section">
           {box.map((carrer, index1) => (
             <Careaux key={index1} carrer={carrer} />
           ))}
         </div>
       </div>
-      <div>
-        <p className="p_entreprises">
-          Découvrez une sélection des entreprises qui operent dans le monde de
-          technologie
-        </p>
-      </div>
-      <div className="Entreprises">
-        {box33.map((value1, index11) => (
-          <CarteEntreprises
-            key={index11}
-            image1={value1.image1}
-            image2={value1.image2}
-            fondateur={value1.fondateur}
-            fondateurs={value1.fondateurs}
-            lien={value1.lien}
-          />
-        ))}
-      </div>
+      <section className="entreprises-section">
+        <div>
+          <p className="p_entreprises">
+            Découvrez une sélection des entreprises qui operent dans le monde de
+            technologie
+          </p>
+        </div>
+        <div className="Entreprises">
+          {box33.map((value1, index11) => (
+            <CarteEntreprises
+              key={index11}
+              image1={value1.image1}
+              image2={value1.image2}
+              fondateur={value1.fondateur}
+              fondateurs={value1.fondateurs}
+              lien={value1.lien}
+            />
+          ))}
+        </div>
+      </section>
     </>
   );
 }

@@ -9,6 +9,7 @@ import FormulaireCandidat from "./FormulaireCandidat";
 import IA from "./IA";
 import Actualites_dev from "./Actualites_dev";
 import Contact from "./Contact";
+import Futuriste from "./Futuriste";
 
 function AppRoutes() {
   return (
@@ -21,6 +22,7 @@ function AppRoutes() {
       <Route path="/IA" element={<IA />} />
       <Route path="/Contact" element={<Contact />} />
       <Route path="/formulaire" element={<FormulaireCandidat />} />
+      <Route path="/Futuriste" element={<Futuriste />} />
     </Routes>
   );
 }

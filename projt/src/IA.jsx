@@ -10,7 +10,13 @@ function CarteTypeIA({
   applications,
   niveau,
   couleur,
+  lien,
 }) {
+  const handleExplorerClick = () => {
+    if (lien) {
+      window.open(lien, "_blank", "noopener,noreferrer");
+    }
+  };
   return (
     <div className={`carte-type-ia ${couleur}`}>
       <div className="carte-ia-header">
@@ -40,13 +46,15 @@ function CarteTypeIA({
         </div>
       </div>
       <div className="carte-ia-footer">
-        <button className="btn-explorer">
-          <span>Explorer</span>
+        <button className="btn-explorer" onClick={handleExplorerClick} aria-label={`Découvrir plus sur: ${nom}`}>
+          <span>Découvrir plus</span>
           <span className="arrow-explore">→</span>
         </button>
       </div>
       <div className="hover-overlay-ia">
-        <span className="click-text-ia">Découvrir plus</span>
+        <button type="button" className="btn-overlay-ia" onClick={handleExplorerClick} aria-label={`Découvrir plus: ${nom}`}>
+          Découvrir plus
+        </button>
       </div>
     </div>
   );
@@ -155,6 +163,7 @@ function IA() {
       applications: ["Recommandations", "Prédictions", "Classification"],
       niveau: "Avancé",
       couleur: "bleu",
+      lien: "https://developers.google.com/machine-learning/crash-course",
     },
     {
       nom: "Deep Learning",
@@ -165,6 +174,7 @@ function IA() {
       applications: ["Vision", "Reconnaissance vocale", "Traduction"],
       niveau: "Expert",
       couleur: "violet",
+      lien: "https://www.deeplearning.ai/resources/what-is-deep-learning/",
     },
     {
       nom: "IA Conversationnelle",
@@ -175,6 +185,7 @@ function IA() {
       applications: ["Chatbots", "Assistants virtuels", "Support client"],
       niveau: "Intermédiaire",
       couleur: "dore",
+      lien: "https://www.ibm.com/topics/conversational-ai",
     },
     {
       nom: "Computer Vision",
@@ -189,6 +200,7 @@ function IA() {
       ],
       niveau: "Avancé",
       couleur: "vert",
+      lien: "https://learn.microsoft.com/azure/ai-services/computer-vision/overview",
     },
     {
       nom: "IA Générative",
@@ -199,6 +211,7 @@ function IA() {
       applications: ["Art IA", "Génération de texte", "Création musicale"],
       niveau: "Expert",
       couleur: "rose",
+      lien: "https://cloud.google.com/discover/what-is-generative-ai",
     },
     {
       nom: "Robotique IA",
@@ -213,6 +226,7 @@ function IA() {
       ],
       niveau: "Expert",
       couleur: "orange",
+      lien: "https://docs.ros.org/en/rolling/",
     },
   ];
 

@@ -3,7 +3,7 @@
 /* ===== CONTENEUR PRINCIPAL ===== */
 .home-container {
   min-height: 100vh;
-  background: #000000;
+  background: #0b1a2b; /* fond uni sombre bleu */
   background-attachment: fixed;
   position: relative;
   overflow-x: hidden;
@@ -16,42 +16,20 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(
-      circle at 20% 30%,
-      rgba(0, 212, 255, 0.1) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 80% 70%,
-      rgba(102, 126, 234, 0.08) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 50% 50%,
-      rgba(255, 255, 255, 0.03) 0%,
-      transparent 50%
-    );
+  background: none; /* Désactivation de la superposition en dégradé pour un fond uni sombre */
   pointer-events: none;
-  animation: backgroundPulse 8s ease-in-out infinite;
+  animation: none;
 }
 
-@keyframes backgroundPulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
-}
+/* animations de fond désactivées pour alléger la page */
 
 /* ===== TEXTE ANIMÉ AVEC EFFET LUMINEUX ===== */
 .animated-text-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 4rem 2rem;
-  margin: 2rem 0;
+  padding: 3rem 1.5rem;
+  margin: 1.5rem 0;
   position: relative;
   z-index: 2;
 }
@@ -69,12 +47,10 @@
 
 .glowing-letter {
   display: inline-block;
-  color: #ffffff;
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8), 0 0 10px rgba(0, 212, 255, 0.6),
-    0 0 15px rgba(0, 212, 255, 0.4), 0 0 20px rgba(0, 212, 255, 0.2);
-  animation: letterGlow 4s ease-in-out infinite,
-    letterFloat 3s ease-in-out infinite;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #e6f2ff;
+  text-shadow: none; /* enlever l'effet lumineux lourd */
+  animation: none; /* pas d'animations lourdes */
+  transition: color 0.2s ease;
   position: relative;
 }
 
@@ -97,50 +73,16 @@
 }
 
 .glowing-letter:hover {
-  transform: scale(1.1) translateY(-3px);
-  color: #00d4ff;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 1), 0 0 15px rgba(0, 212, 255, 0.9),
-    0 0 25px rgba(0, 212, 255, 0.7), 0 0 35px rgba(0, 212, 255, 0.5),
-    0 0 45px rgba(0, 212, 255, 0.3);
+  color: #9ad0ff; /* survol discret */
 }
 
 .glowing-letter:hover::before {
   opacity: 1;
 }
 
-@keyframes letterGlow {
-  0%,
-  100% {
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8),
-      0 0 10px rgba(0, 212, 255, 0.6), 0 0 15px rgba(0, 212, 255, 0.4),
-      0 0 20px rgba(0, 212, 255, 0.2);
-  }
-  25% {
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.9),
-      0 0 15px rgba(102, 126, 234, 0.7), 0 0 25px rgba(102, 126, 234, 0.5),
-      0 0 35px rgba(102, 126, 234, 0.3);
-  }
-  50% {
-    text-shadow: 0 0 10px rgba(255, 255, 255, 1),
-      0 0 20px rgba(0, 212, 255, 0.8), 0 0 30px rgba(0, 212, 255, 0.6),
-      0 0 40px rgba(0, 212, 255, 0.4);
-  }
-  75% {
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.9),
-      0 0 15px rgba(118, 75, 162, 0.7), 0 0 25px rgba(118, 75, 162, 0.5),
-      0 0 35px rgba(118, 75, 162, 0.3);
-  }
-}
+/* animations de lettres supprimées */
 
-@keyframes letterFloat {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-}
+/* animations de flottement supprimées */
 
 /* ===== SECTION DES BOUTONS ===== */
 .buttons-section {
@@ -220,6 +162,42 @@
   text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
 }
 
+/* ===== BOUTONS SUPPLÉMENTAIRES (Actualités & IA) ===== */
+.secondary-buttons {
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+
+.actualites-button {
+  background: linear-gradient(145deg, #0d2136 0%, #0b1a2b 50%, #07111c 100%);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.actualites-button:hover {
+  transform: translateY(-3px) scale(1.05);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 15px 35px rgba(255, 255, 255, 0.2);
+  color: #00d4ff;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+}
+
+.ia-button {
+  background: linear-gradient(145deg, #102a43 0%, #0f3460 60%, #1a1a2e 100%);
+  color: #00d4ff;
+  border-color: rgba(0, 212, 255, 0.3);
+  box-shadow: 0 8px 25px rgba(0, 212, 255, 0.2);
+}
+
+.ia-button:hover {
+  transform: translateY(-3px) scale(1.05);
+  border-color: rgba(0, 212, 255, 0.6);
+  box-shadow: 0 15px 35px rgba(0, 212, 255, 0.4);
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+}
+
 /* ===== SECTION DES CARTES OPTIMISÉES ===== */
 .cards-section {
   position: relative;
@@ -231,21 +209,8 @@
   margin-right: auto;
 }
 
-.cards-section::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    rgba(0, 0, 0, 0.1) 50%,
-    transparent 100%
-  );
-  pointer-events: none;
-}
+/* supprimer le dégradé d'arrière-plan des cartes pour uniformité */
+.cards-section::before { display: none; }
 
 /* ===== CARTES HOME OPTIMISÉES ===== */
 .home-container .div_cartes {
@@ -254,11 +219,11 @@
   max-height: 320px;
   padding: 1.25rem;
   margin: 0.75rem;
-  background: linear-gradient(145deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-  border: 1px solid rgba(0, 212, 255, 0.2);
+  background: #0e2a47; /* bleu élégant uni */
+  border: 1px solid rgba(154, 208, 255, 0.15);
   border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 212, 255, 0.1);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -288,9 +253,8 @@
 }
 
 .home-container .div_cartes:hover {
-  transform: translateY(-8px) scale(1.02);
-  border-color: rgba(0, 212, 255, 0.4);
-  box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2), 0 5px 15px rgba(0, 0, 0, 0.4);
+  transform: translateY(-6px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.45);
 }
 
 .home-container .div_cartes img {
@@ -300,18 +264,17 @@
   border-radius: 12px;
   margin: 0 auto 1rem auto;
   display: block;
-  border: 2px solid rgba(0, 212, 255, 0.2);
-  transition: all 0.3s ease;
+  border: 2px solid rgba(154, 208, 255, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .home-container .div_cartes:hover img {
-  border-color: rgba(0, 212, 255, 0.6);
-  box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
-  transform: scale(1.05);
+  border-color: rgba(154, 208, 255, 0.5);
+  transform: scale(1.04);
 }
 
 .home-container .div_cartes h3 {
-  color: #ffffff;
+  color: #e6f2ff;
   font-size: 1.1rem;
   font-weight: 600;
   margin: 0 0 0.75rem 0;
@@ -326,7 +289,7 @@
 }
 
 .home-container .div_cartes p {
-  color: #e2e8f0;
+  color: #c6d6e8;
   font-size: 0.85rem;
   line-height: 1.5;
   margin: 0;
@@ -339,10 +302,7 @@
   flex-grow: 1;
 }
 
-.home-container .div_cartes:hover h3 {
-  color: #00d4ff;
-  text-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
-}
+.home-container .div_cartes:hover h3 { color: #ffffff; }
 
 .home-container .div_cartes:hover p {
   color: #ffffff;
@@ -570,9 +530,9 @@
 }
 
 /* === BODY === */
-body {
-  background-color: #000000;
-  color: #f0f0f0;
+html, body {
+  background-color: #0b1a2b; /* uniformiser avec home-container */
+  color: #e6f2ff;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
@@ -581,20 +541,16 @@ body {
 /* === TITRE PRINCIPAL === */
 .p_entreprises {
   font-family: "Georgia", serif;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 2rem;
-  color: #ffffff;
-  text-shadow: 0 0 10px #12294d;
-  transition: all 0.6s ease-in-out;
+  color: #e6f2ff;
+  text-shadow: none; /* enlever halo blanc */
   margin: 2rem auto 1.5rem auto;
   text-align: center;
   max-width: 90%;
 }
 
-.p_entreprises:hover {
-  transform: translateY(5px);
-  text-shadow: 0 0 15px #1e3c72;
-}
+.p_entreprises:hover { transform: none; }
 
 /* === CONTENEUR GLOBAL === */
 .Entreprises {
@@ -603,6 +559,12 @@ body {
   gap: 2rem;
   padding: 2rem;
   justify-items: center;
+}
+
+/* section entreprises avec fond uni */
+.entreprises-section {
+  background: #0b1a2b; /* même fond que le haut de page */
+  padding-bottom: 3rem;
 }
 
 /* === CARTE ENTREPRISE === */
@@ -614,15 +576,14 @@ body {
 
   width: 100%;
   max-width: 300px;
-  background: linear-gradient(145deg, #12294d, #0f1e38);
+  background: #0e2a47; /* bleu élégant et uniforme */
   border-radius: 20px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   padding: 1.5rem;
-  color: #f0f0f0;
+  color: #e6f2ff;
 
-  animation: fadeInUp 0.8s ease-out forwards;
-  opacity: 0;
+  opacity: 1;
   min-height: 420px;
   text-align: center;
 }
@@ -639,8 +600,8 @@ body {
 }
 
 .div_entreprises:hover {
-  transform: translateY(-10px) scale(1.03);
-  box-shadow: 0 0 25px rgba(18, 41, 77, 0.8);
+  transform: translateY(-6px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.45);
 }
 
 /* === ZONE IMAGE (pour centrage) === */
@@ -659,10 +620,10 @@ body {
   width: 120px;
   height: 120px;
   object-fit: cover;
-  border: 3px solid #ffffff;
+  border: 3px solid rgba(154, 208, 255, 0.6);
   border-radius: 16px;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-  transition: transform 0.3s ease;
+  box-shadow: none;
+  transition: transform 0.2s ease;
 }
 
 .img1:hover {
@@ -676,10 +637,10 @@ body {
   width: 100px;
   height: 100px;
   object-fit: cover;
-  border: 3px solid #1e3c72;
+  border: 3px solid rgba(154, 208, 255, 0.35);
   border-radius: 50%;
-  box-shadow: 0 0 10px rgba(30, 60, 114, 0.4);
-  transition: transform 0.3s ease;
+  box-shadow: none;
+  transition: transform 0.2s ease;
 }
 
 .img2:hover {
@@ -689,7 +650,7 @@ body {
 /* === TITRE DE LA CARTE === */
 .h2_titre {
   font-size: 1.2rem;
-  color: #cccccc;
+  color: #d9e9fb;
   margin: 1rem 0 0.5rem 0;
 }
 
@@ -711,12 +672,12 @@ body {
 
 .div_entreprises button {
   padding: 0.7rem 1.2rem;
-  background-color: #1e3c72;
-  color: #ffffff;
+  background-color: #134b7c;
+  color: #e6f2ff;
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease;
   font-weight: bold;
   font-size: 0.95rem;
   width: 100%;
@@ -724,6 +685,6 @@ body {
 }
 
 .div_entreprises button:hover {
-  background-color: #274e8e;
-  transform: scale(1.05);
+  background-color: #155a97;
+  transform: translateY(-2px);
 }

@@ -23,7 +23,6 @@ function CarteActualite({
       window.open(lienLecture, "_blank", "noopener,noreferrer");
     }
   };
-
   return (
     <div className="carte-actualite">
       <div className="carte-actualite-header">
@@ -56,14 +55,21 @@ function CarteActualite({
       </div>
 
       <div className="carte-actualite-footer">
-        <button className="btn-lire" onClick={handleLireClick}>
+        <button className="btn-lire" onClick={handleLireClick} aria-label={`Lire l'article: ${titre}`}>
           <span>Lire l'article</span>
           <span className="arrow-read">📖</span>
         </button>
       </div>
 
       <div className="hover-overlay-actualite">
-        <span className="click-text-actualite">Cliquez pour lire</span>
+        <button
+          type="button"
+          className="btn-overlay-lire"
+          onClick={handleLireClick}
+          aria-label={`Lire l'article: ${titre}`}
+        >
+          Cliquer pour lire
+        </button>
       </div>
     </div>
   );

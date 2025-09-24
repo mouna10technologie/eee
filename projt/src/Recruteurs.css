@@ -773,21 +773,22 @@ body{
 
 .p_recruteurs1 {
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-  font-weight: bolder;
-  font-size: xx-large;
-
-  color: #ffffff;  
-  text-shadow: 0 0 5px #ffffff, 0 0 5px #ffffff;
- 
+  font-weight: 700;
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  color: #000000; /* texte en noir */
+  text-shadow: none; /* pas d'effet lumineux */
   text-align: center;
-  transition: all 1s ease-in-out;
+  margin: 0 auto;
+  padding: 0 1rem;
+  animation: softFloat 4s ease-in-out infinite; /* légère animation */
 }
 
-.p_recruteurs1:hover {
-  transform: translateY(5px);
+@keyframes softFloat {
+  0%, 100% { transform: translateY(0); opacity: 0.95; }
+  50% { transform: translateY(-3px); opacity: 1; }
 }
 .div_reruteurs1{
- width: 160px;
+  width: 160px;
   height: 160px;
   background-color: white;
   border-radius: 16px;
@@ -797,11 +798,26 @@ body{
   align-items: center;
   justify-content: center;
   padding: 10px;
-
+  position: relative;
+  flex-direction: column;
 }
 
 .div_reruteurs1:hover{
-transform: translateY(-10px) scale(1.05);
+  transform: translateY(-10px) scale(1.05);
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
 
+}
+
+/* Lien 'cliquer pour visiter' sous les logos */
+.div_reruteurs1 .visit-text {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #0b1a2b;
+  text-decoration: none;
+}
+
+.div_reruteurs1 .visit-text:hover {
+  text-decoration: underline;
 }

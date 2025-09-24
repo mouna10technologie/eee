@@ -525,6 +525,14 @@
   color: #ffffff;
   margin: 0 0 0.8rem 0;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-break: break-word;
 }
 
 .description-type-ia {
@@ -532,6 +540,13 @@
   color: #d0d0d0;
   line-height: 1.5;
   margin-bottom: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+  word-break: break-word;
 }
 
 .domaine-section,
@@ -638,6 +653,25 @@
   font-size: 1.2rem;
   font-weight: 600;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Overlay button for IA cards */
+.btn-overlay-ia {
+  padding: 0.7rem 1.1rem;
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-overlay-ia:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.45);
 }
 
 /* Section informative */
