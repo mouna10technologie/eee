@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "projt/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "projt/dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/projt/dist/$1"
+    }
+  ],
+  "buildCommand": "cd projt && npm run build",
+  "devCommand": "cd projt && npm run dev",
+  "installCommand": "cd projt && npm install"
+}
