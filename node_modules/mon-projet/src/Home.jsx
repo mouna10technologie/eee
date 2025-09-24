@@ -1,7 +1,7 @@
 import Image from "./Image";
 import Body from "./Body";
 import Careaux from "./Careaux";
-import AIJobSearchDemo from "./AIJobSearchDemo";
+import AIJobSearch from "./AIJobSearch";
 import { Link } from "react-router-dom";
 import "./Home.css";
 function CarteEntreprises({ image1, image2, fondateur, fondateurs, lien }) {
@@ -232,7 +232,7 @@ function Home() {
         <AnimatedText text={descriptionText} />
 
         {/* Composant de recherche IA */}
-        <AIJobSearchDemo />
+        <AIJobSearch />
 
         <div className="buttons-section">
           <Link to="/Recruteurs" className="home-button recruteur-button">

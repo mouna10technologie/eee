@@ -10,6 +10,7 @@ import IA from "./IA";
 import Actualites_dev from "./Actualites_dev";
 import Contact from "./Contact";
 import Futuriste from "./Futuriste";
+import JobDetails from "./JobDetails";
 
 function AppRoutes() {
   return (
@@ -23,6 +24,7 @@ function AppRoutes() {
       <Route path="/Contact" element={<Contact />} />
       <Route path="/formulaire" element={<FormulaireCandidat />} />
       <Route path="/Futuriste" element={<Futuriste />} />
+      <Route path="/job/:id" element={<JobDetails />} />
     </Routes>
   );
 }

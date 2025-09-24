@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './AIJobSearch.css';
 
 function AIJobSearch() {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [jobResults, setJobResults] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -17,23 +19,57 @@ function AIJobSearch() {
     setError('');
     
     try {
+      console.log('🔍 Recherche manuelle avec:', searchQuery);
       // Appel à l'API backend pour la recherche IA
       const response = await axios.post('http://localhost:5000/api/search-jobs', {
-        query: searchQuery
+        query: searchQuery.toLowerCase().trim()
       });
 
-      setJobResults(response.data.jobs);
+      console.log('📊 Réponse manuelle reçue:', response.data);
+      console.log('📋 Nombre de jobs:', response.data.jobs?.length || 0);
+      console.log('🔍 Structure complète:', JSON.stringify(response.data, null, 2));
+      
+      // Vérification de la structure des données
+      const jobs = response.data.jobs || response.data || [];
+      console.log('🎯 Jobs à assigner:', jobs);
+      
+      setJobResults(jobs);
       setSuggestedFilters(response.data.filters);
     } catch (err) {
+      console.error('❌ Erreur complète manuelle:', err);
+      console.error('❌ Détails erreur:', err.response?.data || err.message);
       setError('Erreur lors de la recherche. Veuillez réessayer.');
-      console.error('Erreur de recherche:', err);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleExampleSearch = (exampleQuery) => {
+  const handleExampleSearch = async (exampleQuery) => {
     setSearchQuery(exampleQuery);
+    setLoading(true);
+    setError('');
+    
+    try {
+      console.log('🔍 Recherche avec:', exampleQuery);
+      const response = await axios.post('http://localhost:5000/api/search-jobs', {
+        query: exampleQuery
+      });
+      
+      console.log('📊 Réponse reçue:', response.data);
+      console.log('🔍 Structure complète exemple:', JSON.stringify(response.data, null, 2));
+      
+      // Vérification de la structure des données
+      const jobs = response.data.jobs || response.data || [];
+      console.log('🎯 Jobs exemple à assigner:', jobs);
+      
+      setJobResults(jobs);
+      setSuggestedFilters(response.data.filters);
+    } catch (err) {
+      console.error('❌ Erreur complète:', err);
+      setError('Erreur lors de la recherche. Veuillez réessayer.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -69,6 +105,7 @@ function AIJobSearch() {
             </button>
           </div>
         </form>
+
 
         {/* Exemples de recherches */}
         <div className="example-searches">
@@ -135,6 +172,7 @@ function AIJobSearch() {
           </div>
         )}
 
+
         {/* Résultats de recherche */}
         {jobResults.length > 0 && (
           <div className="search-results">
@@ -169,10 +207,16 @@ function AIJobSearch() {
                     }
                   </p>
                   <div className="job-actions">
-                    <button className="apply-btn">
+                    <button 
+                      className="apply-btn"
+                      onClick={() => navigate(`/job/${job._id}`)}
+                    >
                       Postuler
                     </button>
-                    <button className="details-btn">
+                    <button 
+                      className="details-btn"
+                      onClick={() => navigate(`/job/${job._id}`)}
+                    >
                       Voir détails
                     </button>
                   </div>
@@ -188,12 +232,16 @@ function AIJobSearch() {
         )}
 
         {/* Message si aucun résultat */}
-        {jobResults.length === 0 && searchQuery && !loading && !error && (
+        {jobResults.length === 0 && searchQuery && !loading && (
           <div className="no-results">
             <p>🔍 Aucune offre ne correspond à votre recherche.</p>
             <p>Essayez de reformuler votre demande ou utilisez des termes plus généraux.</p>
+            <p style={{fontSize: '12px', color: '#666'}}>
+              Recherche effectuée: "{searchQuery}" | Erreur: {error || 'aucune'}
+            </p>
           </div>
         )}
+
       </div>
     </div>
   );
