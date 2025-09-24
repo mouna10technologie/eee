@@ -1,0 +1,7 @@
+backend/
+projt/node_modules/
+projt/src/
+projt/public/
+*.log
+.env
+.DS_Store
