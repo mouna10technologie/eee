@@ -1,0 +1,13 @@
+@echo off
+echo 🧹 Nettoyage du cache et redemarrage...
+
+echo 🛑 Arret des processus Node.js...
+taskkill /f /im node.exe 2>nul
+
+echo 🗑️ Suppression du cache Vite...
+if exist "node_modules\.vite" rmdir /s /q "node_modules\.vite"
+
+echo 🚀 Redemarrage du serveur de developpement...
+npm run dev
+
+pause

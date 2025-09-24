@@ -1,0 +1,11 @@
+@import './OptimizedCards.css';
+
+.div_globale {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem auto;
+  padding: 1rem;
+  max-width: 1400px;
+  justify-items: center;
+}

@@ -1,0 +1,13 @@
+{
+  "name": "devjob-monorepo",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "cd projt && npm install && npm run build",
+    "dev": "cd projt && npm run dev",
+    "start": "cd backend && npm start"
+  },
+  "workspaces": [
+    "projt",
+    "backend"
+  ]
+}

@@ -1,0 +1,141 @@
+/* ===== CONTENEUR PRINCIPAL ===== */
+.div_ecriture {
+  width: 90%;
+  max-width: 1000px;
+  min-height: 200px;
+  margin: 150px auto 50px auto;
+  padding: 2.5rem;
+  border-radius: 25px;
+  background: linear-gradient(145deg, #0a0a0a 0%, #1a1a2e 50%, #0f3460 100%);
+  border: 2px solid rgba(0, 212, 255, 0.3);
+  box-shadow: 
+    0 20px 60px rgba(0, 212, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.div_ecriture::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+  animation: rotate 8s linear infinite;
+  z-index: -1;
+}
+
+.div_ecriture:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-color: rgba(0, 212, 255, 0.6);
+  box-shadow: 
+    0 30px 80px rgba(0, 212, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* ===== STYLES POUR LES TEXTES LUMINEUX ===== */
+.h1_body {
+  margin: 0 0 1.5rem 0;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.h2_body {
+  margin: 0;
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* ===== ANIMATION DES LETTRES LUMINEUSES ===== */
+.glowing-char {
+  display: inline-block;
+  color: #ffffff;
+  text-shadow: 
+    0 0 5px rgba(255, 255, 255, 0.8),
+    0 0 10px rgba(0, 212, 255, 0.6),
+    0 0 15px rgba(0, 212, 255, 0.4),
+    0 0 20px rgba(0, 212, 255, 0.3);
+  animation: letterGlow 3s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+.main-glowing-text .glowing-char {
+  animation-delay: calc(var(--char-index, 0) * 0.03s);
+}
+
+.quote-glowing-text .glowing-char {
+  color: #e2e8f0;
+  text-shadow: 
+    0 0 3px rgba(226, 232, 240, 0.8),
+    0 0 8px rgba(194, 122, 255, 0.6),
+    0 0 12px rgba(194, 122, 255, 0.4);
+  animation-delay: calc(var(--char-index, 0) * 0.03s + 1s);
+}
+
+.glowing-char:hover {
+  transform: scale(1.1) translateY(-2px);
+  text-shadow: 
+    0 0 8px rgba(255, 255, 255, 1),
+    0 0 16px rgba(0, 212, 255, 0.8),
+    0 0 24px rgba(0, 212, 255, 0.6),
+    0 0 32px rgba(0, 212, 255, 0.4);
+}
+
+.quote-glowing-text .glowing-char:hover {
+  text-shadow: 
+    0 0 8px rgba(226, 232, 240, 1),
+    0 0 16px rgba(194, 122, 255, 0.8),
+    0 0 24px rgba(194, 122, 255, 0.6);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes letterGlow {
+  0%, 100% {
+    text-shadow: 
+      0 0 5px rgba(255, 255, 255, 0.8),
+      0 0 10px rgba(0, 212, 255, 0.6),
+      0 0 15px rgba(0, 212, 255, 0.4);
+    transform: translateY(0px);
+  }
+  50% {
+    text-shadow: 
+      0 0 8px rgba(255, 255, 255, 1),
+      0 0 16px rgba(0, 212, 255, 0.8),
+      0 0 24px rgba(0, 212, 255, 0.6),
+      0 0 32px rgba(0, 212, 255, 0.4);
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .div_ecriture {
+    width: 95%;
+    margin: 100px auto 30px auto;
+    padding: 1.5rem;
+    min-height: 150px;
+  }
+  
+  .h1_body {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .div_ecriture {
+    margin: 80px auto 20px auto;
+    padding: 1rem;
+  }
+}
