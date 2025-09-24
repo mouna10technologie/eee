@@ -1,6 +1,5 @@
 {
-  "buildCommand": "cd projt && npm install && npx vite build --base=./",
+  "buildCommand": "cd projt && npm install && npm run build",
   "outputDirectory": "projt/dist",
-  "installCommand": "npm install --prefix projt",
-  "framework": null
+  "installCommand": "npm install --prefix projt"
 }
