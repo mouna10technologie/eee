@@ -15,6 +15,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // Routes
 app.use("/candidatures", require("./routes/candidatures"));
 app.use("/api/contact", require("./routes/contact"));
+app.use("/api", require("./routes/aiJobSearch"));
 
 // Connexion MongoDB
 mongoose
