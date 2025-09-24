@@ -301,6 +301,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .carte-candidat::before {
@@ -383,6 +385,10 @@
 .competences-section,
 .salaire-section {
   margin-bottom: 0.5rem;
+  overflow: hidden;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
 }
 
 .carte-body h4 {
@@ -393,6 +399,9 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .carte-body p {
@@ -406,6 +415,10 @@
   -webkit-line-clamp: 2;
   line-clamp: 2;
   -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  max-width: 100%;
 }
 
 .competences-tags {
@@ -413,6 +426,8 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-top: 0.5rem;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .competence-tag {
@@ -424,6 +439,11 @@
   font-weight: 500;
   transition: all 0.3s ease;
   cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
+  flex-shrink: 0;
 }
 
 .competence-tag:hover {
@@ -435,6 +455,9 @@
   font-weight: 700;
   color: #4ade80 !important;
   font-size: 1rem !important;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
 }
 
 /* Footer de la carte */
