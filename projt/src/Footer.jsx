@@ -1,8 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import "./Footer.css";
 
 function Footer() {
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+  const [messageType, setMessageType] = useState(''); // 'success' ou 'error'
+
+  const handleNewsletterSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!email.trim()) {
+      setMessage('Veuillez entrer votre email');
+      setMessageType('error');
+      return;
+    }
+
+    setLoading(true);
+    setMessage('');
+
+    try {
+      const response = await axios.post('http://localhost:5000/api/newsletter/subscribe', {
+        email: email.trim()
+      });
+
+      if (response.data.success) {
+        setMessage(response.data.message);
+        setMessageType('success');
+        setEmail(''); // Vider le champ
+      }
+    } catch (error) {
+      console.error('Erreur newsletter:', error);
+      
+      if (error.response?.data?.error) {
+        setMessage(error.response.data.error);
+      } else {
+        setMessage('Erreur lors de l\'inscription. Veuillez réessayer.');
+      }
+      setMessageType('error');
+    } finally {
+      setLoading(false);
+      
+      // Effacer le message après 5 secondes
+      setTimeout(() => {
+        setMessage('');
+        setMessageType('');
+      }, 5000);
+    }
+  };
+
   return (
     <footer className="footer-moderne">
       <div className="footer-container">
@@ -173,16 +221,30 @@ function Footer() {
           <div className="newsletter-section">
             <h4>Newsletter</h4>
             <p>Restez informé des dernières opportunités</p>
-            <div className="newsletter-form">
+            <form onSubmit={handleNewsletterSubmit} className="newsletter-form">
               <input
                 type="email"
                 placeholder="Votre email..."
                 className="newsletter-input"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={loading}
               />
-              <button className="newsletter-btn">
-                <span>✈️</span>
+              <button 
+                type="submit" 
+                className="newsletter-btn"
+                disabled={loading}
+              >
+                <span>{loading ? '⏳' : '✈️'}</span>
               </button>
-            </div>
+            </form>
+            
+            {/* Message de retour */}
+            {message && (
+              <div className={`newsletter-message ${messageType}`}>
+                {messageType === 'success' ? '✅' : '❌'} {message}
+              </div>
+            )}
           </div>
         </div>
       </div>

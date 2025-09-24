@@ -17,6 +17,7 @@ app.use("/candidatures", require("./routes/candidatures"));
 app.use("/api/contact", require("./routes/contact"));
 app.use("/api", require("./routes/aiJobSearch"));
 app.use("/api/jobs", require("./routes/jobs"));
+app.use("/api/newsletter", require("./routes/newsletter"));
 
 // Connexion MongoDB
 mongoose
