@@ -152,6 +152,16 @@ function AIJobSearchDemo() {
 
   const handleExampleSearch = (exampleQuery) => {
     setSearchQuery(exampleQuery);
+    setLoading(true);
+
+    setTimeout(() => {
+      const filters = analyzeQuery(exampleQuery);
+      const results = filterJobs(exampleQuery, filters);
+
+      setJobResults(results);
+      setSuggestedFilters(filters);
+      setLoading(false);
+    }, 1000);
   };
 
   return (

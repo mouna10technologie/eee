@@ -7,8 +7,15 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     rollupOptions: {
-      input: 'index.html'
+      input: {
+        main: 'index.html'
+      }
     }
   },
-  base: '/'
+  base: '/',
+  resolve: {
+    alias: {
+      '@': '/src'
+    }
+  }
 })
