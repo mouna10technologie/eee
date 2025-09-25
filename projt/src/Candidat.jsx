@@ -15,6 +15,7 @@ function Candidat() {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState("");
+  const [messageType, setMessageType] = useState(""); // 'success' ou 'error'
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -104,7 +105,8 @@ function Candidat() {
         }
 
         const result = await submitCandidature(formDataToSend);
-        setSubmitMessage("Votre candidature a été soumise avec succès !");
+        setSubmitMessage("🎉 Félicitations ! Votre candidature a été soumise avec succès !");
+        setMessageType("success");
         
         // Reset form
         setFormData({
@@ -116,10 +118,29 @@ function Candidat() {
           cv: null,
         });
         
+        // Reset file input
+        const fileInput = document.getElementById('cv');
+        if (fileInput) {
+          fileInput.value = '';
+        }
+        
+        // Effacer le message après 8 secondes
+        setTimeout(() => {
+          setSubmitMessage("");
+          setMessageType("");
+        }, 8000);
+        
         console.log("Candidature soumise:", result);
       } catch (error) {
         console.error("Erreur:", error);
-        setSubmitMessage("Erreur lors de la soumission: " + error.message);
+        setSubmitMessage("❌ Erreur lors de la soumission: " + error.message);
+        setMessageType("error");
+        
+        // Effacer le message d'erreur après 5 secondes
+        setTimeout(() => {
+          setSubmitMessage("");
+          setMessageType("");
+        }, 5000);
       } finally {
         setIsSubmitting(false);
       }
@@ -286,8 +307,15 @@ function Candidat() {
           </div>
 
           {submitMessage && (
-            <div className={`submit-message ${submitMessage.includes("succès") ? "success" : "error"}`}>
-              {submitMessage}
+            <div className={`submit-message ${messageType}`}>
+              <div className="message-content">
+                {messageType === "success" && (
+                  <div className="success-animation">
+                    <div className="checkmark">✓</div>
+                  </div>
+                )}
+                <span className="message-text">{submitMessage}</span>
+              </div>
             </div>
           )}
         </form>

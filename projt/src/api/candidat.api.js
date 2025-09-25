@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/candidatures"; // URL pour les candidatures
+const API_URL = "http://localhost:5000/candidatures"; // URL pour les candidatures
 
 // Soumettre une candidature
 export const submitCandidature = async (formData) => {
