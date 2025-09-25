@@ -27,18 +27,10 @@
       transparent 50%
     );
   pointer-events: none;
-  animation: backgroundPulseIA 8s ease-in-out infinite;
+  /* Animation de fond désactivée pour optimiser les performances */
 }
 
-@keyframes backgroundPulseIA {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
-}
+/* Animation backgroundPulseIA supprimée pour optimiser les performances */
 
 .h1_ia {
   font-size: xx-large;
@@ -85,18 +77,10 @@
       transparent 50%
     );
   pointer-events: none;
-  animation: backgroundPulseIA 8s ease-in-out infinite;
+  /* Animation de fond désactivée pour optimiser les performances */
 }
 
-@keyframes backgroundPulseIA {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
-}
+/* Animation backgroundPulseIA supprimée pour optimiser les performances */
 
 /* Header IA */
 .ia-header {
@@ -118,8 +102,7 @@
   color: #ffffff;
   text-shadow: 0 0 10px rgba(102, 126, 234, 0.8),
     0 0 20px rgba(102, 126, 234, 0.6), 0 0 30px rgba(102, 126, 234, 0.4);
-  animation: letterGlowIA 5s ease-in-out infinite,
-    letterFloatIA 3s ease-in-out infinite;
+  /* Animations de texte lourdes supprimées pour optimiser les performances */
   transition: all 0.3s ease;
 }
 
@@ -185,8 +168,7 @@
   color: #ffffff;
   text-shadow: 0 0 8px rgba(102, 126, 234, 0.7),
     0 0 16px rgba(102, 126, 234, 0.5);
-  animation: letterGlowCarrousel 4s ease-in-out infinite,
-    letterFloat 2.5s ease-in-out infinite;
+  /* Animations de carrousel supprimées pour optimiser les performances */
   transition: all 0.3s ease;
 }
 
@@ -196,17 +178,7 @@
   text-shadow: 0 0 12px rgba(255, 215, 0, 0.9), 0 0 20px rgba(255, 215, 0, 0.7);
 }
 
-@keyframes letterGlowCarrousel {
-  0%,
-  100% {
-    text-shadow: 0 0 8px rgba(102, 126, 234, 0.7),
-      0 0 16px rgba(102, 126, 234, 0.5);
-  }
-  50% {
-    text-shadow: 0 0 12px rgba(118, 75, 162, 0.8),
-      0 0 20px rgba(118, 75, 162, 0.6);
-  }
-}
+/* Animation letterGlowCarrousel supprimée pour optimiser les performances */
 
 @keyframes letterFloat {
   0%,
@@ -235,18 +207,10 @@
   height: 200px;
   transform-style: preserve-3d;
   transition: transform 2s ease-in-out;
-  animation: carrouselGlow 4s ease-in-out infinite;
+  /* Animation carrouselGlow supprimée pour optimiser les performances */
 }
 
-@keyframes carrouselGlow {
-  0%,
-  100% {
-    filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.3));
-  }
-  50% {
-    filter: drop-shadow(0 0 30px rgba(118, 75, 162, 0.4));
-  }
-}
+/* Animation carrouselGlow supprimée pour optimiser les performances */
 
 .carrousel-item {
   position: absolute;
@@ -338,8 +302,7 @@
   color: #ffffff;
   text-shadow: 0 0 8px rgba(102, 126, 234, 0.7),
     0 0 16px rgba(102, 126, 234, 0.5);
-  animation: letterGlowTypes 4.2s ease-in-out infinite,
-    letterFloat 2.8s ease-in-out infinite;
+  /* Animations de types supprimées pour optimiser les performances */
   transition: all 0.3s ease;
 }
 
@@ -349,17 +312,7 @@
   text-shadow: 0 0 12px rgba(255, 215, 0, 0.9), 0 0 20px rgba(255, 215, 0, 0.7);
 }
 
-@keyframes letterGlowTypes {
-  0%,
-  100% {
-    text-shadow: 0 0 8px rgba(102, 126, 234, 0.7),
-      0 0 16px rgba(102, 126, 234, 0.5);
-  }
-  50% {
-    text-shadow: 0 0 12px rgba(118, 75, 162, 0.8),
-      0 0 20px rgba(118, 75, 162, 0.6);
-  }
-}
+/* Animation letterGlowTypes supprimée pour optimiser les performances */
 
 .grille-types-ia {
   display: flex;

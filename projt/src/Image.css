@@ -19,7 +19,7 @@
   right: 0;
   bottom: 0;
   background: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
-  animation: pulseGlow 4s ease-in-out infinite;
+  /* Animation pulseGlow supprimée pour optimiser les performances */
   z-index: 1;
 }
 
@@ -58,7 +58,7 @@
   z-index: -1;
   opacity: 0;
   transition: opacity 0.8s ease;
-  animation: borderRotate 3s linear infinite;
+  /* Animation borderRotate supprimée pour optimiser les performances */
 }
 
 .image_hero:hover::before {
@@ -77,59 +77,9 @@
 }
 
 /* ===== ANIMATIONS ===== */
-@keyframes pulseGlow {
-  0%, 100% {
-    opacity: 0.3;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.6;
-    transform: scale(1.1);
-  }
-}
+/* Animation pulseGlow supprimée pour optimiser les performances */
 
-@keyframes borderRotate {
-  0% {
-    background: linear-gradient(45deg, 
-      rgba(0, 212, 255, 0.6) 0%, 
-      rgba(194, 122, 255, 0.6) 25%, 
-      rgba(0, 212, 255, 0.6) 50%, 
-      rgba(194, 122, 255, 0.6) 75%, 
-      rgba(0, 212, 255, 0.6) 100%);
-  }
-  25% {
-    background: linear-gradient(135deg, 
-      rgba(194, 122, 255, 0.6) 0%, 
-      rgba(0, 212, 255, 0.6) 25%, 
-      rgba(194, 122, 255, 0.6) 50%, 
-      rgba(0, 212, 255, 0.6) 75%, 
-      rgba(194, 122, 255, 0.6) 100%);
-  }
-  50% {
-    background: linear-gradient(225deg, 
-      rgba(0, 212, 255, 0.6) 0%, 
-      rgba(194, 122, 255, 0.6) 25%, 
-      rgba(0, 212, 255, 0.6) 50%, 
-      rgba(194, 122, 255, 0.6) 75%, 
-      rgba(0, 212, 255, 0.6) 100%);
-  }
-  75% {
-    background: linear-gradient(315deg, 
-      rgba(194, 122, 255, 0.6) 0%, 
-      rgba(0, 212, 255, 0.6) 25%, 
-      rgba(194, 122, 255, 0.6) 50%, 
-      rgba(0, 212, 255, 0.6) 75%, 
-      rgba(194, 122, 255, 0.6) 100%);
-  }
-  100% {
-    background: linear-gradient(45deg, 
-      rgba(0, 212, 255, 0.6) 0%, 
-      rgba(194, 122, 255, 0.6) 25%, 
-      rgba(0, 212, 255, 0.6) 50%, 
-      rgba(194, 122, 255, 0.6) 75%, 
-      rgba(0, 212, 255, 0.6) 100%);
-  }
-}
+/* Animation borderRotate supprimée pour optimiser les performances */
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { subscribeToNewsletter } from './api/newsletter.api';
 import "./Footer.css";
 
 function Footer() {
@@ -22,22 +22,23 @@ function Footer() {
     setMessage('');
 
     try {
-      const response = await axios.post('http://localhost:5000/api/newsletter/subscribe', {
-        email: email.trim()
-      });
-
-      if (response.data.success) {
-        setMessage(response.data.message);
-        setMessageType('success');
-        setEmail(''); // Vider le champ
-      }
+      const response = await subscribeToNewsletter(email.trim());
+      
+      setMessage(response.message || 'Merci pour votre abonnement !');
+      setMessageType('success');
+      setEmail(''); // Vider le champ
     } catch (error) {
       console.error('Erreur newsletter:', error);
       
-      if (error.response?.data?.error) {
-        setMessage(error.response.data.error);
+      // Gestion spécifique des erreurs de connexion
+      if (error.code === 'ERR_NETWORK' || error.code === 'ECONNREFUSED' || error.message.includes('ERR_CONNECTION_REFUSED')) {
+        setMessage('⚠️ Serveur non disponible. Veuillez réessayer plus tard.');
+      } else if (error.message.includes('déjà abonné')) {
+        setMessage('📧 Cet email est déjà abonné à notre newsletter.');
+      } else if (error.message.includes('invalide')) {
+        setMessage('❌ Format d\'email invalide. Veuillez vérifier votre saisie.');
       } else {
-        setMessage('Erreur lors de l\'inscription. Veuillez réessayer.');
+        setMessage(error.message || 'Erreur lors de l\'inscription. Veuillez réessayer.');
       }
       setMessageType('error');
     } finally {

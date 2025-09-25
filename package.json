@@ -4,6 +4,10 @@
   "scripts": {
     "build": "cd projt && npm install && npm run build",
     "dev": "cd projt && npm run dev",
-    "start": "cd backend && npm start"
+    "start": "cd backend && npm start",
+    "test-connections": "node test-connections.js"
+  },
+  "devDependencies": {
+    "axios": "^1.6.0"
   }
 }

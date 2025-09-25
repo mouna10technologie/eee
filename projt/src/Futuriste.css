@@ -21,7 +21,7 @@
   inset: -20%;
   background: conic-gradient(from 180deg at 50% 50%, rgba(0, 212, 255, 0.08), rgba(118, 75, 162, 0.08), rgba(0, 212, 255, 0.08));
   filter: blur(40px);
-  animation: slowSpin 20s linear infinite;
+  /* Animation slowSpin supprimée pour optimiser les performances */
 }
 
 .hero-overlay {
@@ -46,7 +46,7 @@
 .letter-glow {
   display: inline-block;
   text-shadow: 0 0 10px rgba(0, 212, 255, 0.7), 0 0 20px rgba(118, 75, 162, 0.6);
-  animation: letterPulse 4s ease-in-out infinite;
+  /* Animation letterPulse supprimée pour optimiser les performances */
 }
 
 .futuriste-subtitle {
@@ -115,7 +115,7 @@
   object-fit: contain; /* éviter le recadrage pour une visibilité maximale */
   object-position: center;
   background: linear-gradient(180deg, #0b0f1a 0%, #0e2a47 100%); /* letterboxing discret */
-  animation: fadeInSlide 0.6s ease;
+  /* Animation fadeInSlide allégée - gardée car courte et utile */
 }
 
 @keyframes fadeInSlide {
@@ -267,12 +267,6 @@
   color: #c9dbf4;
 }
 
-@keyframes slowSpin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
+/* Animation slowSpin supprimée pour optimiser les performances */
 
-@keyframes letterPulse {
-  0%, 100% { filter: brightness(1); }
-  50% { filter: brightness(1.25); }
-}
+/* Animation letterPulse supprimée pour optimiser les performances */

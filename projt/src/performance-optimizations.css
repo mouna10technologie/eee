@@ -1,0 +1,140 @@
+/* ===== OPTIMISATIONS DE PERFORMANCE ET D'ACCESSIBILITÉ ===== */
+/* Fichier créé pour optimiser les animations du site DevJob */
+
+/* Respecter les préférences utilisateur pour les animations réduites */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  /* Désactiver les animations de texte lourdes */
+  .glowing-letter,
+  .lettre-brillante-titre-rec,
+  .lettre-brillante-rec,
+  .lettre-animee-ia,
+  .lettre-animee-carrousel,
+  .lettre-animee-types,
+  .lettre-animee-contact,
+  .lettre-animee-recruteur,
+  .lettre-animee-outils,
+  .letter-glow {
+    animation: none !important;
+    transform: none !important;
+  }
+  
+  /* Désactiver les animations de fond */
+  .home-container::before,
+  .les_recruteurs::before,
+  .section-sites-recrutement::before,
+  .div_recruter::before,
+  .intelligenceArtificielle::before,
+  .section-ia::before,
+  .section-contact::before,
+  .footer-moderne::before,
+  .div_image::before,
+  .futuriste-hero::before {
+    animation: none !important;
+  }
+  
+  /* Simplifier les transitions au survol */
+  .home-button:hover,
+  .div_cartes:hover,
+  .carte-site-recrutement:hover,
+  .image_hero:hover,
+  .carte-type-ia:hover,
+  .carrousel-item:hover {
+    transform: translateY(-2px) !important;
+  }
+}
+
+/* ===== OPTIMISATIONS GÉNÉRALES DES PERFORMANCES ===== */
+
+/* Utiliser will-change avec parcimonie pour les éléments qui bougent vraiment */
+.home-button,
+.div_cartes,
+.carte-site-recrutement,
+.carte-type-ia {
+  will-change: transform;
+}
+
+/* Optimiser le rendu avec transform3d pour activer l'accélération matérielle */
+.home-container,
+.animated-text-container,
+.cards-section,
+.les_recruteurs,
+.section-ia {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Réduire la complexité des box-shadow pour améliorer les performances */
+.div_cartes,
+.carte-site-recrutement,
+.carte-type-ia {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.div_cartes:hover,
+.carte-site-recrutement:hover,
+.carte-type-ia:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Optimiser les transitions pour qu'elles soient plus fluides */
+.home-button,
+.div_cartes,
+.carte-site-recrutement,
+.carte-type-ia,
+.image_hero {
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+/* Réduire les text-shadow complexes */
+.lettre-brillante-titre-rec,
+.lettre-brillante-rec,
+.lettre-animee-ia,
+.lettre-animee-contact {
+  text-shadow: 0 0 8px rgba(102, 126, 234, 0.6) !important;
+}
+
+/* ===== NOTES D'OPTIMISATION ===== */
+/*
+OPTIMISATIONS EFFECTUÉES :
+
+1. ANIMATIONS DE FOND SUPPRIMÉES :
+   - backgroundPulseRec (Recruteurs.css)
+   - backgroundPulseIA (IA.css) 
+   - backgroundPulseContact (Contact.css)
+   - backgroundPulseFooter (Footer.css)
+   - pulseGlow (Image.css)
+   - slowSpin (Futuriste.css)
+
+2. ANIMATIONS DE TEXTE SUPPRIMÉES :
+   - letterGlowTitreRec, letterGlowRec (Recruteurs.css)
+   - letterGlowIA, letterFloatIA (IA.css)
+   - letterGlowCarrousel, letterGlowTypes (IA.css)
+   - letterGlowContact, letterFloatContact (Contact.css)
+   - letterPulse (Futuriste.css)
+
+3. ANIMATIONS D'IMAGES SUPPRIMÉES :
+   - imageRotateGlow, imagePulse, imageFloat (Recruteurs.css)
+   - carrouselGlow (IA.css)
+   - borderRotate (Image.css)
+
+4. ACCESSIBILITÉ AMÉLIORÉE :
+   - Support de prefers-reduced-motion
+   - Transitions plus courtes (0.2s au lieu de 0.3s+)
+   - Box-shadows simplifiées
+   - Text-shadows allégées
+
+RÉSULTAT :
+- Réduction significative de l'utilisation CPU/GPU
+- Animations plus fluides sur les appareils moins puissants
+- Meilleure accessibilité pour les utilisateurs sensibles au mouvement
+- Conservation de l'esthétique générale du site
+*/
