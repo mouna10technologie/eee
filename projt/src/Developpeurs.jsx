@@ -126,11 +126,13 @@ function Developpeurs() {
       titre: "Plateformes pour trouver un job",
       description:
         "Pour décrocher un job tech, explore des sites spécialisés (LinkedIn, Welcome to the Jungle, Indeed, Stack Overflow Jobs, Malt), engage-toi dans des hackathons, meetups, communautés Discord et forums, et valorise tes contributions open-source pour te différencier.",
+      url: "https://www.linkedin.com/jobs/",
     },
     {
       titre: "Bonus : selon le domaine, apprendre…",
       description:
-        "Selon le domaine, il est utile d’apprendre la cybersécurité de base, les principes UX/UI surtout pour le frontend, l’architecture logicielle côté backend, ainsi que le Clean Code et les principes SOLID pour un code propre et maintenable.",
+        "Selon le domaine, il est utile d'apprendre la cybersécurité de base, les principes UX/UI surtout pour le frontend, l'architecture logicielle côté backend, ainsi que le Clean Code et les principes SOLID pour un code propre et maintenable.",
+      url: "https://www.figma.com/",
     },
   ];
 

@@ -20,24 +20,47 @@ function AIJobSearch() {
     
     try {
       console.log('🔍 Recherche manuelle avec:', searchQuery);
-      // Appel à l'API backend pour la recherche IA
-      const response = await axios.post('http://localhost:5000/api/search-jobs', {
-        query: searchQuery.toLowerCase().trim()
-      });
-
-      console.log('📊 Réponse manuelle reçue:', response.data);
-      console.log('📋 Nombre de jobs:', response.data.jobs?.length || 0);
-      console.log('🔍 Structure complète:', JSON.stringify(response.data, null, 2));
       
-      // Vérification de la structure des données
-      const jobs = response.data.jobs || response.data || [];
-      console.log('🎯 Jobs à assigner:', jobs);
+      // Simulation de données pour le développement (sans backend)
+      const mockJobs = [
+        {
+          id: 1,
+          title: `Développeur ${searchQuery}`,
+          company: "DevCorp",
+          location: "Paris, France",
+          salary: "50k-65k €",
+          type: "CDI",
+          description: `Excellent poste de développeur en ${searchQuery}. Environnement moderne et équipe sympathique.`
+        },
+        {
+          id: 2,
+          title: `Lead ${searchQuery} Developer`,
+          company: "TechStart",
+          location: "Marseille, France",
+          salary: "60k-75k €", 
+          type: "CDI",
+          description: `Poste de lead developer en ${searchQuery}. Responsabilités techniques et encadrement d'équipe.`
+        },
+        {
+          id: 3,
+          title: `Freelance ${searchQuery}`,
+          company: "Multiple Clients",
+          location: "Remote",
+          salary: "400-600€/jour",
+          type: "Freelance",
+          description: `Missions freelance en ${searchQuery}. Flexibilité et projets variés.`
+        }
+      ];
       
-      setJobResults(jobs);
-      setSuggestedFilters(response.data.filters);
+      // Simulation d'un délai d'API
+      await new Promise(resolve => setTimeout(resolve, 800));
+      
+      console.log('📊 Données simulées:', mockJobs);
+      setJobResults(mockJobs);
+      setSuggestedFilters(['Remote', 'CDI', 'Freelance', 'Startup']);
+      
     } catch (err) {
       console.error('❌ Erreur complète manuelle:', err);
-      console.error('❌ Détails erreur:', err.response?.data || err.message);
       setError('Erreur lors de la recherche. Veuillez réessayer.');
     } finally {
       setLoading(false);
@@ -51,19 +74,36 @@ function AIJobSearch() {
     
     try {
       console.log('🔍 Recherche avec:', exampleQuery);
-      const response = await axios.post('http://localhost:5000/api/search-jobs', {
-        query: exampleQuery
-      });
       
-      console.log('📊 Réponse reçue:', response.data);
-      console.log('🔍 Structure complète exemple:', JSON.stringify(response.data, null, 2));
+      // Simulation de données pour le développement (sans backend)
+      const mockJobs = [
+        {
+          id: 1,
+          title: `Développeur ${exampleQuery}`,
+          company: "TechCorp",
+          location: "Paris, France",
+          salary: "45k-60k €",
+          type: "CDI",
+          description: `Poste de développeur spécialisé en ${exampleQuery}. Rejoignez notre équipe dynamique !`
+        },
+        {
+          id: 2,
+          title: `Senior ${exampleQuery} Developer`,
+          company: "InnovateLab",
+          location: "Lyon, France", 
+          salary: "55k-70k €",
+          type: "CDI",
+          description: `Nous recherchons un développeur senior en ${exampleQuery} pour des projets innovants.`
+        }
+      ];
       
-      // Vérification de la structure des données
-      const jobs = response.data.jobs || response.data || [];
-      console.log('🎯 Jobs exemple à assigner:', jobs);
+      // Simulation d'un délai d'API
+      await new Promise(resolve => setTimeout(resolve, 1000));
       
-      setJobResults(jobs);
-      setSuggestedFilters(response.data.filters);
+      console.log('📊 Données simulées:', mockJobs);
+      setJobResults(mockJobs);
+      setSuggestedFilters(['Remote', 'CDI', 'Startup']);
+      
     } catch (err) {
       console.error('❌ Erreur complète:', err);
       setError('Erreur lors de la recherche. Veuillez réessayer.');
