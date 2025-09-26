@@ -570,3 +570,100 @@
     font-size: 0.85rem;
   }
 }
+
+/* ===== STYLES STATIQUES AVEC COULEUR CYAN POUR ACTUALITÉS ===== */
+
+/* Titre principal "Les actualités" */
+.h1_actualités_static {
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  font-weight: 800;
+  font-family: "Arial", sans-serif;
+  color: #00FFFF; /* cyan lumineux */
+  text-shadow: 0 3px 6px rgba(0, 255, 255, 0.4);
+  margin: 2rem 0;
+  position: relative;
+  text-align: center;
+}
+
+.h1_actualités_static:hover {
+  color: #40E0D0; /* cyan plus clair au survol */
+  transform: translateY(-3px);
+  transition: all 0.3s ease;
+}
+
+/* Texte descriptif des actualités */
+.h3_actualités_static {
+  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  font-weight: 400;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  line-height: 1.6;
+  margin: 2rem auto;
+  max-width: 900px;
+  padding: 0 1rem;
+  color: #00FFFF; /* cyan lumineux */
+  text-shadow: 0 2px 4px rgba(0, 255, 255, 0.3);
+  text-align: center;
+  position: relative;
+}
+
+.h3_actualités_static:hover {
+  color: #40E0D0; /* cyan plus clair au survol */
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+/* Titre des actualités récentes */
+.titre-actualites-recentes-static {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 600;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  line-height: 1.4;
+  margin: 3rem auto 2rem auto;
+  max-width: 800px;
+  padding: 0 1rem;
+  color: #00FFFF; /* cyan lumineux */
+  text-shadow: 0 2px 4px rgba(0, 255, 255, 0.3);
+  text-align: center;
+  position: relative;
+}
+
+.titre-actualites-recentes-static:hover {
+  color: #40E0D0; /* cyan plus clair au survol */
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+/* ===== RESPONSIVE POUR LES STYLES CYAN ACTUALITÉS ===== */
+@media (max-width: 768px) {
+  .h1_actualités_static {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin: 1.5rem 0;
+  }
+  
+  .h3_actualités_static {
+    font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+    margin: 1.5rem auto;
+    padding: 0 0.5rem;
+  }
+  
+  .titre-actualites-recentes-static {
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    margin: 2rem auto 1.5rem auto;
+    padding: 0 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .h1_actualités_static {
+    font-size: clamp(1.8rem, 4.5vw, 2.5rem);
+  }
+  
+  .h3_actualités_static {
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    line-height: 1.5;
+  }
+  
+  .titre-actualites-recentes-static {
+    font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  }
+}

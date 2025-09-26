@@ -35,27 +35,7 @@ function CarteEntreprises({ image1, image2, fondateur, fondateurs, lien }) {
   );
 }
 
-function AnimatedText({ text }) {
-  return (
-    <div className="animated-text-container">
-      <h1 className="animated-description">
-        {text.split("").map((char, index) => (
-          <span
-            key={index}
-            className="glowing-letter"
-            style={{ animationDelay: `${index * 0.05}s` }}
-          >
-            {char === " " ? "\u00A0" : char}
-          </span>
-        ))}
-      </h1>
-    </div>
-  );
-}
-
 function Home() {
-  const descriptionText =
-    "Une plateforme dédiée aux recruteurs pour identifier, évaluer et accompagner les meilleurs talents tech, spécialisés en IA, machine learning et technologies de pointe.";
 
   let box = [
     [
@@ -229,7 +209,6 @@ function Home() {
         <Body />
         <Image />
 
-        <AnimatedText text={descriptionText} />
 
         {/* Composant de recherche IA */}
         <AIJobSearch />

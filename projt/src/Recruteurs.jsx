@@ -17,11 +17,22 @@ function CarteRecruteurs1({ image, lien }) {
   );
 }
 
-function CarteRecruteurs({ titre, description }) {
+function CarteRecruteurs({ titre, description, url }) {
+  const handleClick = () => {
+    if (url) {
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+  };
+
   return (
     <div className="div_recruteurs">
       <h2>{titre}</h2>
       <h4>{description}</h4>
+      {url && (
+        <button className="btn-carte-recruteur" onClick={handleClick}>
+          Visiter le site
+        </button>
+      )}
     </div>
   );
 }
@@ -79,12 +90,14 @@ function CarteSiteRecrutement({
     </div>
   );
 }
+
 function Recruteurs() {
   let box2 = [
     {
-      titre: "Plateformes de sourcing et publication d’offres",
+      titre: "Plateformes de sourcing et publication d'offres",
       description:
-        "es plateformes de sourcing et de publication d’offres incluent LinkedIn Recruiter pour contacter directement des développeurs, des sites d’annonces comme Indeed, Monster et Glassdoor, GitHub pour identifier et évaluer les contributions des développeurs, Stack Overflow Jobs pour les profils tech spécialisés, et AngelList pour recruter dans les startups.",
+        "Les plateformes de sourcing et de publication d'offres incluent LinkedIn Recruiter pour contacter directement des développeurs, des sites d'annonces comme Indeed, Monster et Glassdoor, GitHub pour identifier et évaluer les contributions des développeurs, Stack Overflow Jobs pour les profils tech spécialisés, et AngelList pour recruter dans les startups.",
+      url: "https://www.linkedin.com/talent/",
     },
 
     {
@@ -92,23 +105,27 @@ function Recruteurs() {
         "Outils de gestion du recrutement (ATS - Applicant Tracking Systems)",
       description:
         "Les ATS (Applicant Tracking Systems) comme Greenhouse, Lever, SmartRecruiters, Workable et Breezy HR permettent de centraliser les candidatures, gérer le pipeline de recrutement et intégrer des tests techniques.",
+      url: "https://www.greenhouse.io/",
     },
 
     {
       titre: "Tests techniques et évaluation des compétences",
       description:
-        "Les outils de tests techniques comme Codility, HackerRank, LeetCode, DevSkiller et Kaggle permettent d’évaluer les compétences des développeurs et data scientists via des exercices de codage et projets réels.",
+        "Les outils de tests techniques comme Codility, HackerRank, LeetCode, DevSkiller et Kaggle permettent d'évaluer les compétences des développeurs et data scientists via des exercices de codage et projets réels.",
+      url: "https://www.codility.com/",
     },
 
     {
-      titre: " Outils de vidéo conférence",
+      titre: "Outils de vidéo conférence",
       description:
         "Les outils de vidéoconférence comme Zoom, Microsoft Teams, Google Meet et Whereby sont utilisés pour réaliser des entretiens à distance.",
+      url: "https://zoom.us/",
     },
     {
       titre: "Outils de communication et collaboration interne",
       description:
         "Les outils comme Slack et Microsoft Teams facilitent la communication et la collaboration entre recruteurs et équipes techniques.",
+      url: "https://slack.com/",
     },
   ];
 
@@ -243,7 +260,7 @@ function Recruteurs() {
     },
 
     { image: "/LeHibou.png", lien: "https://www.lehibou.com/" },
-    { image: "Linkedin.webp", lien: "https://fr.linkedin.com/" },
+    { image: "/Linkedin.webp", lien: "https://fr.linkedin.com/" },
 
     { image: "/Malt.webp", lien: "https://www.malt.fr/" },
 
@@ -269,39 +286,19 @@ function Recruteurs() {
           width="400px"
           height="400px"
         />
-        <h1 className="h1_recruteurs">
-          {"Les recruteurs".split('').map((char, index) => (
-            <span key={index} className="lettre-brillante-titre-rec" style={{animationDelay: `${index * 0.1}s`}}>
-              {char === ' ' ? '\u00A0' : char}
-            </span>
-          ))}
+        <h1 className="h1_recruteurs_static">
+          Les recruteurs
         </h1>
-        <h3 className="h3_recruteurs">
-          <span className="texte-lumineux-rec">
-            {"Le recruteur est un professionnel qui identifie et sélectionne les meilleurs profils pour répondre aux besoins d'une entreprise, notamment dans le secteur tech.".split('').map((char, index) => (
-              <span key={index} className="lettre-brillante-rec" style={{animationDelay: `${index * 0.02}s`}}>
-                {char === ' ' ? '\u00A0' : char}
-              </span>
-            ))}
-          </span>
+        <h3 className="h3_recruteurs_static">
+          Le recruteur est un professionnel qui identifie et sélectionne les meilleurs profils pour répondre aux besoins d'une entreprise, notamment dans le secteur tech.
         </h3>
       </div>
 
       {/* Section des sites de recrutement */}
       <div className="section-sites-recrutement">
         <div className="sites-header">
-          <h2 className="titre-sites-recrutement">
-            {"🚀 Plateformes de Recrutement pour Développeurs"
-              .split("")
-              .map((char, index) => (
-                <span
-                  key={index}
-                  className="lettre-animee-recruteur"
-                  style={{ animationDelay: `${index * 0.03}s` }}
-                >
-                  {char === " " ? "\u00A0" : char}
-                </span>
-              ))}
+          <h2 className="titre-sites-recrutement-static">
+            🚀 Plateformes de Recrutement pour Développeurs
           </h2>
           <p className="sous-titre-sites">
             Découvrez les meilleures plateformes pour trouver votre prochain
@@ -326,18 +323,8 @@ function Recruteurs() {
       </div>
 
       <div className="div_recruter">
-        <h2 className="titre-outils-recruteurs">
-          {"Les outils couramment utilisés par les recruteurs pour le recrutement des développeurs"
-            .split("")
-            .map((char, index) => (
-              <span
-                key={index}
-                className="lettre-animee-outils"
-                style={{ animationDelay: `${index * 0.02}s` }}
-              >
-                {char === " " ? "\u00A0" : char}
-              </span>
-            ))}
+        <h2 className="titre-outils-recruteurs-static">
+          Les outils couramment utilisés par les recruteurs pour le recrutement des développeurs
         </h2>
       </div>
 
@@ -347,6 +334,7 @@ function Recruteurs() {
             key={index3}
             titre={valeur.titre}
             description={valeur.description}
+            url={valeur.url}
           />
         ))}
       </div>
@@ -354,7 +342,6 @@ function Recruteurs() {
       <div>
         <p className="p_recruteurs1">
           Découvrez une sélection des sites freelance pour trouver des missions ou
-          recruter des talents tech.
         </p>
       </div>
       <div className="Recruteurs1">

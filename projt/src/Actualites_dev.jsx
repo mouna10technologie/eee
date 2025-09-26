@@ -214,29 +214,17 @@ function Actualites_dev() {
     <>
       <div className="Les_actualités">
         <img src="/news-technology.webp" />
-        <h1 className="h1_actualités"> Les actualités</h1>
-        <h3 className="h3_actualités">
-          Suivez les actualités clés du développement, quels que soient votre
-          niveau et votre spécialité : nouvelles technologies, langages à jour,
-          outils émergents et tendances du secteur.
+        <h1 className="h1_actualités_static">Les actualités</h1>
+        <h3 className="h3_actualités_static">
+          Suivez les actualités clés du développement, quels que soient votre niveau et votre spécialité : nouvelles technologies, langages à jour, outils émergents et tendances du secteur.
         </h3>
       </div>
 
       {/* Section des actualités récentes */}
       <div className="section-actualites-recentes">
         <div className="actualites-header">
-          <h2 className="titre-actualites-recentes">
-            {"🚀 Actualités Développement & Tech"
-              .split("")
-              .map((char, index) => (
-                <span
-                  key={index}
-                  className="lettre-animee-actualites"
-                  style={{ animationDelay: `${index * 0.04}s` }}
-                >
-                  {char === " " ? "\u00A0" : char}
-                </span>
-              ))}
+          <h2 className="titre-actualites-recentes-static">
+            🚀 Actualités Développement & Tech
           </h2>
           <p className="sous-titre-actualites">
             Restez à jour avec les dernières innovations technologiques

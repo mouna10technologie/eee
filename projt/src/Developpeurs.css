@@ -75,6 +75,48 @@
   padding: 0 1rem;
 }
 
+/* Style statique pour le texte des développeurs avec couleur jaune lumineux */
+.h3_developpeurs_static {
+  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  font-weight: 400;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  line-height: 1.6;
+  margin: 2rem auto;
+  max-width: 900px;
+  padding: 0 1rem;
+  color: #FFD700; /* jaune lumineux */
+  text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
+  text-align: center;
+  position: relative;
+}
+
+.h3_developpeurs_static:hover {
+  color: #FFED4E; /* jaune plus vif au survol */
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+/* Style statique pour le titre des outils essentiels avec couleur jaune lumineux */
+.titre-outils-essentiels-static {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 600;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  line-height: 1.4;
+  margin: 3rem auto 2rem auto;
+  max-width: 800px;
+  padding: 0 1rem;
+  color: #FFD700; /* jaune lumineux */
+  text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
+  text-align: center;
+  position: relative;
+}
+
+.titre-outils-essentiels-static:hover {
+  color: #FFED4E; /* jaune plus vif au survol */
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
 /* Container des cartes développeurs optimisé */
 .container-cartes-dev {
   display: grid;

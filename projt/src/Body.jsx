@@ -17,17 +17,14 @@ function GlowingText({ text, className }) {
 }
 
 function Body() {
-  const mainText = "Recruter un développeur, c'est choisir un bâtisseur de solutions, pas seulement un codeur.";
-  const quoteText = "« Le talent, c'est avoir envie de faire quelque chose. » — Jacques Brel";
-  
   return (
     <>
-      <div className="div_ecriture">
-        <h1 className="h1_body">
-          <GlowingText text={mainText} className="main-glowing-text" />
+      <div className="text-before-image">
+        <h1 className="main-text-yellow">
+          Recruter un développeur, c'est choisir un bâtisseur de solutions, pas seulement un codeur.
         </h1>
-        <h2 className="h2_body">
-          <GlowingText text={quoteText} className="quote-glowing-text" />
+        <h2 className="quote-text-yellow">
+          « Le talent, c'est avoir envie de faire quelque chose. » — Jacques Brel
         </h2>
       </div>
     </>

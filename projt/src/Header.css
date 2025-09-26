@@ -7,10 +7,4 @@ header {
   padding: auto;
   position: fixed;
   z-index: 30;
-   
-
-  /*background-color: #2B0862;*/
-  box-shadow: 10px 20px 30px (0, 0, 0, 0.4);
-  border-radius: 20px;
-  box-shadow: 40px 50px 40px rgba(63, 11, 143, 0.5);
 }

@@ -821,3 +821,184 @@ body{
 .div_reruteurs1 .visit-text:hover {
   text-decoration: underline;
 }
+
+/* ===== STYLES STATIQUES AVEC COULEUR CYAN ===== */
+
+/* Titre principal "Les recruteurs" */
+.h1_recruteurs_static {
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  font-weight: 800;
+  font-family: "Arial", sans-serif;
+  color: #00FFFF; /* cyan lumineux */
+  text-shadow: 0 3px 6px rgba(0, 255, 255, 0.4);
+  margin: 2rem 0;
+  position: relative;
+  text-align: center;
+}
+
+.h1_recruteurs_static:hover {
+  color: #40E0D0; /* cyan plus clair au survol */
+  transform: translateY(-3px);
+  transition: all 0.3s ease;
+}
+
+/* Texte descriptif des recruteurs */
+.h3_recruteurs_static {
+  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  font-weight: 400;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  line-height: 1.6;
+  margin: 2rem auto;
+  max-width: 900px;
+  padding: 0 1rem;
+  color: #00FFFF; /* cyan lumineux */
+  text-shadow: 0 2px 4px rgba(0, 255, 255, 0.3);
+  text-align: center;
+  position: relative;
+}
+
+.h3_recruteurs_static:hover {
+  color: #40E0D0; /* cyan plus clair au survol */
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+/* Titre des plateformes de recrutement */
+.titre-sites-recrutement-static {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 600;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  line-height: 1.4;
+  margin: 3rem auto 2rem auto;
+  max-width: 800px;
+  padding: 0 1rem;
+  color: #00FFFF; /* cyan lumineux */
+  text-shadow: 0 2px 4px rgba(0, 255, 255, 0.3);
+  text-align: center;
+  position: relative;
+}
+
+.titre-sites-recrutement-static:hover {
+  color: #40E0D0; /* cyan plus clair au survol */
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+.titre-sites-recrutement-static:hover {
+  color: #40E0D0; /* cyan plus clair au survol */
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+/* Titre des outils pour recruteurs */
+.titre-outils-recruteurs-static {
+  font-size: clamp(1.4rem, 2.8vw, 2rem);
+  font-weight: 600;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  line-height: 1.4;
+  margin: 3rem auto 2rem auto;
+  max-width: 900px;
+  padding: 0 1rem;
+  color: #00FFFF; /* cyan lumineux */
+  text-shadow: 0 2px 4px rgba(0, 255, 255, 0.3);
+  text-align: center;
+  position: relative;
+}
+
+.titre-outils-recruteurs-static:hover {
+  color: #40E0D0; /* cyan plus clair au survol */
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+/* ===== RESPONSIVE POUR LES STYLES CYAN ===== */
+@media (max-width: 768px) {
+  .h1_recruteurs_static {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin: 1.5rem 0;
+  }
+  
+  .h3_recruteurs_static {
+    font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+    margin: 1.5rem auto;
+    padding: 0 0.5rem;
+  }
+  
+  .titre-sites-recrutement-static {
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    margin: 2rem auto 1.5rem auto;
+    padding: 0 0.5rem;
+  }
+  
+  .titre-outils-recruteurs-static {
+    font-size: clamp(1.2rem, 2.3vw, 1.6rem);
+    margin: 2.5rem auto 1.5rem auto;
+    padding: 0 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .h1_recruteurs_static {
+    font-size: clamp(1.8rem, 4.5vw, 2.5rem);
+  }
+  
+  .h3_recruteurs_static {
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    line-height: 1.5;
+  }
+  
+  .titre-sites-recrutement-static {
+    font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  }
+  
+  .titre-outils-recruteurs-static {
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    margin: 2rem auto 1rem auto;
+  }
+}
+
+/* ===== BOUTON POUR LES CARTES RECRUTEURS ===== */
+.btn-carte-recruteur {
+  background: linear-gradient(145deg, #00FFFF 0%, #40E0D0 100%);
+  color: #000000;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(0, 255, 255, 0.3);
+}
+
+.btn-carte-recruteur:hover {
+  background: linear-gradient(145deg, #40E0D0 0%, #00CED1 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 255, 255, 0.4);
+  color: #ffffff;
+}
+
+.btn-carte-recruteur:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 255, 255, 0.3);
+}
+
+/* Responsive pour le bouton */
+@media (max-width: 768px) {
+  .btn-carte-recruteur {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn-carte-recruteur {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+    width: 100%;
+    max-width: 200px;
+  }
+}
