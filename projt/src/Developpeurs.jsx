@@ -1,11 +1,22 @@
 import "./Developpeurs.css";
 import { useNavigate } from "react-router-dom";
 
-function CarteDeveloppeurs({ titre, description }) {
+function CarteDeveloppeurs({ titre, description, url }) {
+  const handleClick = () => {
+    if (url) {
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+  };
+
   return (
     <div className="div_developpeurs">
       <h2>{titre}</h2>
       <h4>{description}</h4>
+      {url && (
+        <button className="btn-carte-developpeur" onClick={handleClick}>
+          Visiter le site
+        </button>
+      )}
     </div>
   );
 }
@@ -74,37 +85,42 @@ function CarteCandidat({
 
 function Developpeurs() {
   const navigate = useNavigate();
-
   let box1 = [
     {
       titre: "Langages de programmation (selon le domaine)",
       description:
         "Les langages et outils varient selon le domaine : web (frontend/backend), mobile, logiciel, data/IA, avec Git pour le versionnement et des bases de données relationnelles ou NoSQL.",
+      url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
     },
     {
       titre: "Environnement de développement",
       description:
-        "Un environnement de développement réunit un éditeur de code (comme VS Code), l’usage du terminal avec des commandes de base, et des gestionnaires de paquets adaptés au langage (npm, pip, composer).",
+        "Un environnement de développement réunit un éditeur de code (comme VS Code), l'usage du terminal avec des commandes de base, et des gestionnaires de paquets adaptés au langage (npm, pip, composer).",
+      url: "https://code.visualstudio.com/",
     },
     {
       titre: "Tests et débogage",
       description:
-        "Les tests et le débogage reposent sur des frameworks dédiés (Jest, Pytest, JUnit, PHPUnit) pour valider le bon fonctionnement du code, des débogueurs intégrés aux IDE pour identifier les erreurs à l’exécution, ainsi que des linters et formatters (ESLint, Prettier, Black) pour maintenir un code propre et uniforme.",
+        "Les tests et le débogage reposent sur des frameworks dédiés (Jest, Pytest, JUnit, PHPUnit) pour valider le bon fonctionnement du code, des débogueurs intégrés aux IDE pour identifier les erreurs à l'exécution, ainsi que des linters et formatters (ESLint, Prettier, Black) pour maintenir un code propre et uniforme.",
+      url: "https://jestjs.io/",
     },
     {
       titre: "Déploiement & DevOps (bases recommandées)",
       description:
-        "Maîtrise des bases de Docker, des pipelines CI/CD (GitHub Actions, GitLab CI, Jenkins) et des principales plateformes d’hébergement comme Vercel, Netlify, Heroku, AWS et DigitalOcean.",
+        "Maîtrise des bases de Docker, des pipelines CI/CD (GitHub Actions, GitLab CI, Jenkins) et des principales plateformes d'hébergement comme Vercel, Netlify, Heroku, AWS et DigitalOcean.",
+      url: "https://www.docker.com/",
     },
     {
       titre: "Soft Skills & pratiques pro",
       description:
         "Maîtrise des méthodologies Agile/Scrum, gestion de projet avec Trello/Jira, communication claire en anglais, et lecture efficace de documentation technique.",
+      url: "https://www.atlassian.com/agile",
     },
     {
       titre: "Portfolio & présence pro",
       description:
         "Avoir un GitHub organisé avec des projets soignés, un portfolio personnel clair incluant projets, CV et contact, un CV à jour, et un profil LinkedIn complet et professionnel.",
+      url: "https://github.com/",
     },
     {
       titre: "Plateformes pour trouver un job",
@@ -241,6 +257,7 @@ function Developpeurs() {
             key={index}
             titre={valeur.titre}
             description={valeur.description}
+            url={valeur.url}
           />
         ))}
       </div>

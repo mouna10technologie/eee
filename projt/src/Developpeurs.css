@@ -91,20 +91,13 @@
 }
 
 .h3_developpeurs_static:hover {
-  color: #FFED4E; /* jaune plus vif au survol */
   transform: translateY(-2px);
   transition: all 0.3s ease;
 }
 
 /* Style statique pour le titre des outils essentiels avec couleur jaune lumineux */
-.titre-outils-essentiels-static {
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
-  font-weight: 600;
-  font-family: Georgia, "Times New Roman", Times, serif;
-  line-height: 1.4;
-  margin: 3rem auto 2rem auto;
-  max-width: 800px;
-  padding: 0 1rem;
+  .titre-outils-essentiels-static {
+    font-size: clamp(1.1rem, 2.2vw, 1.5rem);
   color: #FFD700; /* jaune lumineux */
   text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
   text-align: center;
@@ -845,7 +838,6 @@
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
   display: inline-flex;
-  align-items: center;
   gap: 10px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
 }
@@ -854,4 +846,50 @@
   transform: translateY(-3px);
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.45);
   filter: brightness(1.05);
+}
+
+/* ===== BOUTON POUR LES CARTES DÉVELOPPEURS ===== */
+.btn-carte-developpeur {
+  background: linear-gradient(145deg, #FFD700 0%, #FFED4E 100%);
+  color: #000000;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+.btn-carte-developpeur:hover {
+  background: linear-gradient(145deg, #FFED4E 0%, #FFA500 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 215, 0, 0.4);
+  color: #ffffff;
+}
+
+.btn-carte-developpeur:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+}
+
+/* Responsive pour le bouton développeurs */
+@media (max-width: 768px) {
+  .btn-carte-developpeur {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn-carte-developpeur {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+    width: 100%;
+    max-width: 200px;
+  }
 }

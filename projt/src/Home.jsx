@@ -101,7 +101,7 @@ function Home() {
 
     {
       image1: "/amazon.jpg",
-      image2: "amazon.png",
+      image2: "/amazon.png",
       titre: "fondateur :",
       fondateurs: " Jeff Bezos (1994, États-Unis)",
       lien: "https://www.amazon.com//",
@@ -136,7 +136,7 @@ function Home() {
 
     {
       image1: "/Microsoft.jpg",
-      image2: "microsoft.png",
+      image2: "/microsoft.png",
       titre: "fondateur",
       fondateurs: " Bill Gates, Paul Allen (1975, États-Unis)",
       lien: "https://www.microsoft.com/",
@@ -196,7 +196,7 @@ function Home() {
 
     {
       image1: "/apple.jpeg",
-      image2: "apple.png",
+      image2: "/apple.png",
       titre: "fondateur",
       fondateurs: "Steve Jobs, Steve Wozniak, Ronald Wayne (1976, États-Unis) ",
       lien: "https://www.apple.com/",

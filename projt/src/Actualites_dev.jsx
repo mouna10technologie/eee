@@ -1,10 +1,21 @@
 import "./Actualites_dev.css";
 
-function CarteActualités({ titre, description }) {
+function CarteActualités({ titre, description, url }) {
+  const handleClick = () => {
+    if (url) {
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+  };
+
   return (
     <div className="div_actualités">
       <h2>{titre}</h2>
       <h4>{description}</h4>
+      {url && (
+        <button className="btn-carte-actualite" onClick={handleClick}>
+          Visiter le site
+        </button>
+      )}
     </div>
   );
 }
@@ -74,45 +85,50 @@ function CarteActualite({
     </div>
   );
 }
+
 function Actualites_dev() {
   let box3 = [
     {
       titre: "Sites Web et plateformes de contenu tech",
       description:
         "Sites comme Hacker News, Reddit (r/programming, r/webdev...), Medium, Dev.to et Hashnode offrent des actualités tech, des discussions, des articles et des tutoriels pour les développeurs..",
+      url: "https://news.ycombinator.com/",
     },
-
     {
       titre: "Newsletters Tech populaires",
       description:
-        "Des newsletters comme JavaScript Weekly, Frontend Focus, TLDR ou The Pragmatic Engineer offrent un résumé régulier de l’actualité tech, du développement web, de l’IA et des tendances du secteur.",
+        "Des newsletters comme JavaScript Weekly, Frontend Focus, TLDR ou The Pragmatic Engineer offrent un résumé régulier de l'actualité tech, du développement web, de l'IA et des tendances du secteur.",
+      url: "https://javascriptweekly.com/",
     },
-
     {
       titre: "Podcasts pour développeurs",
       description:
-        "Les podcasts comme Syntax.fm, CodeNewbie, Developer Tea, The Changelog et Command Line Heroes permettent aux développeurs de rester informés sur le frontend, les projets open source, les carrières tech et l’histoire de la technologie.",
+        "Les podcasts comme Syntax.fm, CodeNewbie, Developer Tea, The Changelog et Command Line Heroes permettent aux développeurs de rester informés sur le frontend, les projets open source, les carrières tech et l'histoire de la technologie.",
+      url: "https://syntax.fm/",
     },
-
     {
       titre: "Chaînes YouTube",
       description:
         "Des chaînes YouTube comme Fireship, The Net Ninja, Traversy Media ou TechWorld with Nana proposent des vidéos pédagogiques et actuelles sur le développement, le DevOps, et les technologies cloud.",
+      url: "https://www.youtube.com/@Fireship",
     },
     {
       titre: "Communautés / Forums",
       description:
         "Des communautés comme Stack Overflow, Discord, GitHub Trending et Twitter/X permettent de suivre les tendances, échanger avec d'autres développeurs et découvrir des projets ou contenus populaires..",
+      url: "https://stackoverflow.com/",
     },
     {
       titre: "Conférences et événements",
       description:
         "Des conférences comme Google I/O, WWDC, JSConf ou des meetups locaux permettent de découvrir les nouveautés tech, approfondir des sujets spécialisés et rencontrer la communauté.",
+      url: "https://events.google.com/io/",
     },
     {
       titre: "Outils de veille tech automatisée",
       description:
         "Des outils comme Feedly, Daily.dev, Pocket et GitHub permettent d'automatiser la veille tech en centralisant, sauvegardant et suivant les contenus et projets pertinents.",
+      url: "https://daily.dev/",
     },
   ];
 
@@ -248,18 +264,8 @@ function Actualites_dev() {
       </div>
 
       <div className="div_actuel">
-        <h2 className="titre-outils-actualites">
-          {"Les outils et ressources que les développeurs utilisent pour rester à jour"
-            .split("")
-            .map((char, index) => (
-              <span
-                key={index}
-                className="lettre-animee-outils-actu"
-                style={{ animationDelay: `${index * 0.025}s` }}
-              >
-                {char === " " ? "\u00A0" : char}
-              </span>
-            ))}
+        <h2 className="titre-outils-actualites-static">
+          Les outils et ressources que les développeurs utilisent pour rester à jour
         </h2>
       </div>
 
@@ -269,6 +275,7 @@ function Actualites_dev() {
             key={index4}
             titre={valeur.titre}
             description={valeur.description}
+            url={valeur.url}
           />
         ))}
       </div>
