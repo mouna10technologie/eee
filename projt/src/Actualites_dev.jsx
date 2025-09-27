@@ -229,7 +229,7 @@ function Actualites_dev() {
   return (
     <>
       <div className="Les_actualités">
-        <img src="/news-technology.webp" />
+        <img className="imageac" src="/news-technology.webp" />
         <h1 className="h1_actualités_static">Les actualités</h1>
         <h3 className="h3_actualités_static">
           Suivez les actualités clés du développement, quels que soient votre niveau et votre spécialité : nouvelles technologies, langages à jour, outils émergents et tendances du secteur.

@@ -5,7 +5,7 @@
   background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
   text-align: center;
   color: #e60278;
-  margin-top: 100px;
+  
   padding: 4rem 2rem;
   position: relative;
   overflow: hidden;
@@ -738,4 +738,7 @@
     width: 100%;
     max-width: 200px;
   }
+}
+.imageac{
+  margin-top: 60px;
 }
