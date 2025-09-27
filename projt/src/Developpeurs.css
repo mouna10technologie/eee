@@ -942,3 +942,38 @@
     max-width: 200px;
   }
 }
+
+/* ===== MAIN POINTEUSE DÉVELOPPEURS ===== */
+.main-pointeuse-dev {
+  display: inline-block;
+  font-size: 2.5rem;
+  margin-left: 1rem;
+  color: #FFD700; /* jaune doré */
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6));
+  animation: pointeAnimeDev 2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes pointeAnimeDev {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(10px) scale(1.1);
+  }
+}
+
+/* Responsive pour la main pointeuse développeurs */
+@media (max-width: 768px) {
+  .main-pointeuse-dev {
+    font-size: 2rem;
+    margin-left: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-pointeuse-dev {
+    font-size: 1.8rem;
+    margin-left: 0.3rem;
+  }
+}

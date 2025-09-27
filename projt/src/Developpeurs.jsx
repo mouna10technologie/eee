@@ -265,6 +265,7 @@ function Developpeurs() {
       <div className="div_devlopper">
         <h2 className="titre-outils-essentiels-static">
           Les outils essentiels qu'un développeur doit maîtriser ou connaître
+          <span className="main-pointeuse-dev">👇</span>
         </h2>
       </div>
 
