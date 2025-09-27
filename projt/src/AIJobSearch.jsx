@@ -19,46 +19,10 @@ function AIJobSearch() {
     setError('');
     
     try {
-      console.log('🔍 Recherche manuelle avec:', searchQuery);
-      
-      // Simulation de données pour le développement (sans backend)
-      const mockJobs = [
-        {
-          id: 1,
-          title: `Développeur ${searchQuery}`,
-          company: "DevCorp",
-          location: "Paris, France",
-          salary: "50k-65k €",
-          type: "CDI",
-          description: `Excellent poste de développeur en ${searchQuery}. Environnement moderne et équipe sympathique.`
-        },
-        {
-          id: 2,
-          title: `Lead ${searchQuery} Developer`,
-          company: "TechStart",
-          location: "Marseille, France",
-          salary: "60k-75k €", 
-          type: "CDI",
-          description: `Poste de lead developer en ${searchQuery}. Responsabilités techniques et encadrement d'équipe.`
-        },
-        {
-          id: 3,
-          title: `Freelance ${searchQuery}`,
-          company: "Multiple Clients",
-          location: "Remote",
-          salary: "400-600€/jour",
-          type: "Freelance",
-          description: `Missions freelance en ${searchQuery}. Flexibilité et projets variés.`
-        }
-      ];
-      
-      // Simulation d'un délai d'API
-      await new Promise(resolve => setTimeout(resolve, 800));
-      
-      console.log('📊 Données simulées:', mockJobs);
-      setJobResults(mockJobs);
-      setSuggestedFilters(['Remote', 'CDI', 'Freelance', 'Startup']);
-      
+      console.log('🔍 Recherche backend avec:', searchQuery);
+      const { data } = await axios.post('http://localhost:5000/api/search-jobs', { query: searchQuery });
+      setJobResults(data.jobs || []);
+      setSuggestedFilters(data.filters || null);
     } catch (err) {
       console.error('❌ Erreur complète manuelle:', err);
       setError('Erreur lors de la recherche. Veuillez réessayer.');
@@ -73,37 +37,10 @@ function AIJobSearch() {
     setError('');
     
     try {
-      console.log('🔍 Recherche avec:', exampleQuery);
-      
-      // Simulation de données pour le développement (sans backend)
-      const mockJobs = [
-        {
-          id: 1,
-          title: `Développeur ${exampleQuery}`,
-          company: "TechCorp",
-          location: "Paris, France",
-          salary: "45k-60k €",
-          type: "CDI",
-          description: `Poste de développeur spécialisé en ${exampleQuery}. Rejoignez notre équipe dynamique !`
-        },
-        {
-          id: 2,
-          title: `Senior ${exampleQuery} Developer`,
-          company: "InnovateLab",
-          location: "Lyon, France", 
-          salary: "55k-70k €",
-          type: "CDI",
-          description: `Nous recherchons un développeur senior en ${exampleQuery} pour des projets innovants.`
-        }
-      ];
-      
-      // Simulation d'un délai d'API
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      console.log('📊 Données simulées:', mockJobs);
-      setJobResults(mockJobs);
-      setSuggestedFilters(['Remote', 'CDI', 'Startup']);
-      
+      console.log('🔍 Recherche backend avec:', exampleQuery);
+      const { data } = await axios.post('http://localhost:5000/api/search-jobs', { query: exampleQuery });
+      setJobResults(data.jobs || []);
+      setSuggestedFilters(data.filters || null);
     } catch (err) {
       console.error('❌ Erreur complète:', err);
       setError('Erreur lors de la recherche. Veuillez réessayer.');
@@ -247,18 +184,22 @@ function AIJobSearch() {
                     }
                   </p>
                   <div className="job-actions">
-                    <button 
-                      className="apply-btn"
-                      onClick={() => navigate(`/job/${job._id}`)}
-                    >
-                      Postuler
-                    </button>
-                    <button 
-                      className="details-btn"
-                      onClick={() => navigate(`/job/${job._id}`)}
-                    >
-                      Voir détails
-                    </button>
+                    {job._id && (
+                      <>
+                        <button 
+                          className="apply-btn"
+                          onClick={() => navigate(`/job/${job._id}`, { state: { openForm: true } })}
+                        >
+                          Postuler
+                        </button>
+                        <button 
+                          className="details-btn"
+                          onClick={() => navigate(`/job/${job._id}`)}
+                        >
+                          Voir détails
+                        </button>
+                      </>
+                    )}
                   </div>
                   <div className="job-meta">
                     <span className="job-date">

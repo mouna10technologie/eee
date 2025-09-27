@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, Navigate } from "react-router-dom";
 
 import Home from "./Home";
 import Developpeurs from "./Developpeurs";
@@ -16,6 +16,9 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      {/* Gardes contre les URLs invalides vers JobDetails */}
+      <Route path="/job" element={<Navigate to="/" replace />} />
+      <Route path="/job/undefined" element={<Navigate to="/" replace />} />
       <Route path="/Developpeurs" element={<Developpeurs />} />
       <Route path="/Recruteurs" element={<Recruteurs />} />
       <Route path="/Candidat" element={<Candidat />} />

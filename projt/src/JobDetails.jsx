@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import './JobDetails.css';
 
 function JobDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -22,8 +23,26 @@ function JobDetails() {
   const [applicationSuccess, setApplicationSuccess] = useState(false);
 
   useEffect(() => {
+    const isValidObjectId = (val) => typeof val === 'string' && /^[a-fA-F0-9]{24}$/.test(val);
+    if (!id || id === 'undefined' || !isValidObjectId(id)) {
+      console.error('ID invalide pour JobDetails:', id);
+      setError("Identifiant d'offre manquant ou invalide dans l'URL");
+      setLoading(false);
+      // Naviguer en arrière pour éviter de rester sur une page cassée
+      try { navigate(-1); } catch (_) {}
+      return;
+    }
     fetchJobDetails();
   }, [id]);
+
+  // Ouvrir automatiquement le formulaire si on vient du bouton "Postuler"
+  useEffect(() => {
+    if (location?.state?.openForm) {
+      setShowApplicationForm(true);
+      // Nettoyer l'état de navigation pour éviter une réouverture au back
+      window.history.replaceState({}, document.title);
+    }
+  }, [location?.state]);
 
   const fetchJobDetails = async () => {
     try {

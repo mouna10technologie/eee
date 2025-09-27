@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getAllJobs, searchJobs } from '../api/jobs.api';
 import './JobsList.css';
 
 const JobsList = () => {
+  const navigate = useNavigate();
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -215,11 +217,22 @@ const JobsList = () => {
               
               <div className="job-footer">
                 <span className="job-date">
-                  Publié le {new Date(job.datePublication).toLocaleDateString()}
+                  Publié le {new Date(job.datePublication).toLocaleDateString('fr-FR')}
                 </span>
-                <button className="apply-button">
-                  Postuler
-                </button>
+                <div className="job-actions">
+                  <button
+                    className="apply-button"
+                    onClick={() => navigate(`/job/${job._id}`, { state: { openForm: true } })}
+                  >
+                    Postuler
+                  </button>
+                  <button
+                    className="details-button"
+                    onClick={() => navigate(`/job/${job._id}`)}
+                  >
+                    Détails
+                  </button>
+                </div>
               </div>
             </div>
           ))

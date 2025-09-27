@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 const Job = require('../models/Job');
 
 // 📄 GET: Toutes les offres d'emploi
@@ -36,7 +37,11 @@ router.get('/', async (req, res) => {
 // 🔍 GET: Une offre d'emploi par ID
 router.get('/:id', async (req, res) => {
   try {
-    const job = await Job.findById(req.params.id);
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: 'ID de job invalide' });
+    }
+    const job = await Job.findById(id);
     if (!job) {
       return res.status(404).json({ error: 'Offre d\'emploi non trouvée' });
     }
@@ -62,8 +67,12 @@ router.post('/', async (req, res) => {
 // 📝 PUT: Modifier une offre d'emploi
 router.put('/:id', async (req, res) => {
   try {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: 'ID de job invalide' });
+    }
     const updatedJob = await Job.findByIdAndUpdate(
-      req.params.id,
+      id,
       req.body,
       { new: true, runValidators: true }
     );
@@ -82,8 +91,12 @@ router.put('/:id', async (req, res) => {
 // ❌ DELETE: Supprimer une offre d'emploi (désactiver)
 router.delete('/:id', async (req, res) => {
   try {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: 'ID de job invalide' });
+    }
     const job = await Job.findByIdAndUpdate(
-      req.params.id,
+      id,
       { actif: false },
       { new: true }
     );
@@ -103,7 +116,11 @@ router.delete('/:id', async (req, res) => {
 router.post('/:id/apply', async (req, res) => {
   try {
     const { candidatId, message } = req.body;
-    const job = await Job.findById(req.params.id);
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: 'ID de job invalide' });
+    }
+    const job = await Job.findById(id);
     
     if (!job) {
       return res.status(404).json({ error: 'Offre d\'emploi non trouvée' });
