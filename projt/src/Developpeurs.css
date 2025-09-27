@@ -4,7 +4,7 @@
   background: #0b1a2b; /* fond sombre unifié */
   text-align: center;
   color: #e6f2ff; /* texte clair */
-  
+
   padding: 4rem 2rem;
   position: relative;
   overflow: hidden;
@@ -41,7 +41,9 @@
   position: relative;
 }
 
-.h1_developpeurs::before { content: none; }
+.h1_developpeurs::before {
+  content: none;
+}
 
 @keyframes titlePulse {
   0%,
@@ -84,7 +86,7 @@
   margin: 2rem auto;
   max-width: 900px;
   padding: 0 1rem;
-  color: #FFD700; /* jaune lumineux */
+  color: #ffd700; /* jaune lumineux */
   text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
   text-align: center;
   position: relative;
@@ -96,16 +98,16 @@
 }
 
 /* Style statique pour le titre des outils essentiels avec couleur jaune lumineux */
-  .titre-outils-essentiels-static {
-    font-size: clamp(1.1rem, 2.2vw, 1.5rem);
-  color: #FFD700; /* jaune lumineux */
+.titre-outils-essentiels-static {
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  color: #ffd700; /* jaune lumineux */
   text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
   text-align: center;
   position: relative;
 }
 
 .titre-outils-essentiels-static:hover {
-  color: #FFED4E; /* jaune plus vif au survol */
+  color: #ffed4e; /* jaune plus vif au survol */
   transform: translateY(-2px);
   transition: all 0.3s ease;
 }
@@ -126,70 +128,98 @@
   overflow-x: hidden;
 }
 
-/* Cartes d'outils essentiels optimisées */
+/* Cartes d'outils essentiels optimisées avec images */
 .div_developpeurs {
   width: 100%;
-  max-width: 240px;
-  min-height: 220px;
-  max-height: 220px;
-  background: #0e2a47; /* bleu élégant uni en cohérence */
-  border-radius: 15px;
-  padding: 1rem;
-  margin: 0 auto;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(154, 208, 255, 0.15);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  max-width: 320px;
+  min-height: 400px;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
+  border-radius: 16px;
+  padding: 0;
+  margin: 1rem auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .div_developpeurs::before {
   content: none;
 }
 
-.div_developpeurs:hover::before { left: auto; }
-
-.div_developpeurs h2 {
-  color: #d9e9fb;
-  font-size: 1rem;
-  font-weight: 100;
-  margin-bottom: 0.75rem;
-  text-shadow: none;
-  line-height: 1.3;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
-
-.div_developpeurs h4 {
-  color: #c6d6e8;
-  font-size: 0.85rem;
-  font-weight: 400;
-  line-height: 1.4;
-  margin: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  line-clamp: 4;
-  -webkit-box-orient: vertical;
-  flex-grow: 1;
-}
-
 .div_developpeurs:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.45);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+  border-color: rgba(102, 126, 234, 0.3);
 }
 
-.div_developpeurs:hover h2 { color: #ffffff; }
+.image-developpeur-container {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  border-radius: 16px 16px 0 0;
+  position: relative;
+}
 
-.div_developpeurs:hover h4 { color: #ffffff; }
+.image-developpeur {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.div_developpeurs:hover .image-developpeur {
+  transform: scale(1.1);
+}
+
+.contenu-developpeur {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.contenu-developpeur h2 {
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  line-height: 1.3;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.contenu-developpeur h4 {
+  color: #d0d0d0;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0 0 1.5rem 0;
+  flex: 1;
+}
+
+.btn-carte-developpeur {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.8rem 1.2rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: auto;
+}
+
+.btn-carte-developpeur:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+  background: linear-gradient(45deg, #7c8ef0, #8a5bb8);
+}
 
 /* Animation du titre principal */
 .div_devlopper {
@@ -201,7 +231,9 @@
   border-radius: 16px;
 }
 
-.div_devlopper::before { content: none; }
+.div_devlopper::before {
+  content: none;
+}
 
 @keyframes backgroundPulse {
   0%,
@@ -281,7 +313,9 @@
   overflow: hidden;
 }
 
-.section-candidats::before { content: none; }
+.section-candidats::before {
+  content: none;
+}
 
 .candidats-header {
   text-align: center;
@@ -344,7 +378,9 @@
   content: none;
 }
 
-.carte-candidat:hover::before { left: auto; }
+.carte-candidat:hover::before {
+  left: auto;
+}
 
 .carte-candidat:hover {
   transform: translateY(-6px);
@@ -565,7 +601,9 @@
   box-sizing: border-box;
 }
 
-.Developpeurs::before { content: none; }
+.Developpeurs::before {
+  content: none;
+}
 
 @keyframes containerGlow {
   0%,
@@ -820,11 +858,22 @@
 }
 
 @keyframes handWiggle {
-  0%, 100% { transform: translateX(0); }
-  10% { transform: translateX(-2px); }
-  20% { transform: translateX(0); }
-  30% { transform: translateX(-2px); }
-  40% { transform: translateX(0); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(-2px);
+  }
+  20% {
+    transform: translateX(0);
+  }
+  30% {
+    transform: translateX(-2px);
+  }
+  40% {
+    transform: translateX(0);
+  }
 }
 
 .button_candidat button {
@@ -850,7 +899,7 @@
 
 /* ===== BOUTON POUR LES CARTES DÉVELOPPEURS ===== */
 .btn-carte-developpeur {
-  background: linear-gradient(145deg, #FFD700 0%, #FFED4E 100%);
+  background: linear-gradient(145deg, #ffd700 0%, #ffed4e 100%);
   color: #000000;
   border: none;
   border-radius: 8px;
@@ -866,7 +915,7 @@
 }
 
 .btn-carte-developpeur:hover {
-  background: linear-gradient(145deg, #FFED4E 0%, #FFA500 100%);
+  background: linear-gradient(145deg, #ffed4e 0%, #ffa500 100%);
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(255, 215, 0, 0.4);
   color: #ffffff;

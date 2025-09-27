@@ -1,7 +1,7 @@
 import "./Developpeurs.css";
 import { useNavigate } from "react-router-dom";
 
-function CarteDeveloppeurs({ titre, description, url }) {
+function CarteDeveloppeurs({ titre, description, url, image }) {
   const handleClick = () => {
     if (url) {
       window.open(url, "_blank", "noopener,noreferrer");
@@ -10,13 +10,20 @@ function CarteDeveloppeurs({ titre, description, url }) {
 
   return (
     <div className="div_developpeurs">
-      <h2>{titre}</h2>
-      <h4>{description}</h4>
-      {url && (
-        <button className="btn-carte-developpeur" onClick={handleClick}>
-          Visiter le site
-        </button>
+      {image && (
+        <div className="image-developpeur-container">
+          <img src={image} alt={titre} className="image-developpeur" />
+        </div>
       )}
+      <div className="contenu-developpeur">
+        <h2>{titre}</h2>
+        <h4>{description}</h4>
+        {url && (
+          <button className="btn-carte-developpeur" onClick={handleClick}>
+            Visiter le site
+          </button>
+        )}
+      </div>
     </div>
   );
 }
@@ -91,48 +98,56 @@ function Developpeurs() {
       description:
         "Les langages et outils varient selon le domaine : web (frontend/backend), mobile, logiciel, data/IA, avec Git pour le versionnement et des bases de données relationnelles ou NoSQL.",
       url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+      image: "/Developeurs.png",
     },
     {
       titre: "Environnement de développement",
       description:
         "Un environnement de développement réunit un éditeur de code (comme VS Code), l'usage du terminal avec des commandes de base, et des gestionnaires de paquets adaptés au langage (npm, pip, composer).",
       url: "https://code.visualstudio.com/",
+      image: "/microsoft.png",
     },
     {
       titre: "Tests et débogage",
       description:
         "Les tests et le débogage reposent sur des frameworks dédiés (Jest, Pytest, JUnit, PHPUnit) pour valider le bon fonctionnement du code, des débogueurs intégrés aux IDE pour identifier les erreurs à l'exécution, ainsi que des linters et formatters (ESLint, Prettier, Black) pour maintenir un code propre et uniforme.",
       url: "https://jestjs.io/",
+      image: "/DevloppeurX.jpeg",
     },
     {
       titre: "Déploiement & DevOps (bases recommandées)",
       description:
         "Maîtrise des bases de Docker, des pipelines CI/CD (GitHub Actions, GitLab CI, Jenkins) et des principales plateformes d'hébergement comme Vercel, Netlify, Heroku, AWS et DigitalOcean.",
       url: "https://www.docker.com/",
+      image: "/amazon.png",
     },
     {
       titre: "Soft Skills & pratiques pro",
       description:
         "Maîtrise des méthodologies Agile/Scrum, gestion de projet avec Trello/Jira, communication claire en anglais, et lecture efficace de documentation technique.",
       url: "https://www.atlassian.com/agile",
+      image: "/Technologie.jpeg",
     },
     {
       titre: "Portfolio & présence pro",
       description:
         "Avoir un GitHub organisé avec des projets soignés, un portfolio personnel clair incluant projets, CV et contact, un CV à jour, et un profil LinkedIn complet et professionnel.",
       url: "https://github.com/",
+      image: "/Linkedin.webp",
     },
     {
       titre: "Plateformes pour trouver un job",
       description:
         "Pour décrocher un job tech, explore des sites spécialisés (LinkedIn, Welcome to the Jungle, Indeed, Stack Overflow Jobs, Malt), engage-toi dans des hackathons, meetups, communautés Discord et forums, et valorise tes contributions open-source pour te différencier.",
       url: "https://www.linkedin.com/jobs/",
+      image: "/Un_developpeur.png",
     },
     {
       titre: "Bonus : selon le domaine, apprendre…",
       description:
         "Selon le domaine, il est utile d'apprendre la cybersécurité de base, les principes UX/UI surtout pour le frontend, l'architecture logicielle côté backend, ainsi que le Clean Code et les principes SOLID pour un code propre et maintenable.",
       url: "https://www.figma.com/",
+      image: "/ai3.jpg",
     },
   ];
 
@@ -260,6 +275,7 @@ function Developpeurs() {
             titre={valeur.titre}
             description={valeur.description}
             url={valeur.url}
+            image={valeur.image}
           />
         ))}
       </div>

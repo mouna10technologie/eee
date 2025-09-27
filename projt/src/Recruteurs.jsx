@@ -2,7 +2,12 @@ import "./Recruteurs.css";
 function CarteRecruteurs1({ image, lien }) {
   return (
     <div className="div_reruteurs1">
-      <a href={lien} target="_blank" rel="noopener noreferrer" className="img-link">
+      <a
+        href={lien}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="img-link"
+      >
         <img
           src={image}
           alt="image des sites freelance"
@@ -10,14 +15,19 @@ function CarteRecruteurs1({ image, lien }) {
           height="100px"
         />
       </a>
-      <a href={lien} target="_blank" rel="noopener noreferrer" className="visit-text">
+      <a
+        href={lien}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="visit-text"
+      >
         cliquer pour visiter
       </a>
     </div>
   );
 }
 
-function CarteRecruteurs({ titre, description, url }) {
+function CarteRecruteurs({ titre, description, url, image }) {
   const handleClick = () => {
     if (url) {
       window.open(url, "_blank", "noopener,noreferrer");
@@ -26,13 +36,20 @@ function CarteRecruteurs({ titre, description, url }) {
 
   return (
     <div className="div_recruteurs">
-      <h2>{titre}</h2>
-      <h4>{description}</h4>
-      {url && (
-        <button className="btn-carte-recruteur" onClick={handleClick}>
-          Visiter le site
-        </button>
+      {image && (
+        <div className="image-recruteur-container">
+          <img src={image} alt={titre} className="image-recruteur" />
+        </div>
       )}
+      <div className="contenu-recruteur">
+        <h2>{titre}</h2>
+        <h4>{description}</h4>
+        {url && (
+          <button className="btn-carte-recruteur" onClick={handleClick}>
+            Visiter le site
+          </button>
+        )}
+      </div>
     </div>
   );
 }
@@ -98,6 +115,7 @@ function Recruteurs() {
       description:
         "Les plateformes de sourcing et de publication d'offres incluent LinkedIn Recruiter pour contacter directement des développeurs, des sites d'annonces comme Indeed, Monster et Glassdoor, GitHub pour identifier et évaluer les contributions des développeurs, Stack Overflow Jobs pour les profils tech spécialisés, et AngelList pour recruter dans les startups.",
       url: "https://www.linkedin.com/talent/",
+      image: "/Linkedin.webp",
     },
 
     {
@@ -106,6 +124,7 @@ function Recruteurs() {
       description:
         "Les ATS (Applicant Tracking Systems) comme Greenhouse, Lever, SmartRecruiters, Workable et Breezy HR permettent de centraliser les candidatures, gérer le pipeline de recrutement et intégrer des tests techniques.",
       url: "https://www.greenhouse.io/",
+      image: "/Technologie.jpeg",
     },
 
     {
@@ -113,6 +132,7 @@ function Recruteurs() {
       description:
         "Les outils de tests techniques comme Codility, HackerRank, LeetCode, DevSkiller et Kaggle permettent d'évaluer les compétences des développeurs et data scientists via des exercices de codage et projets réels.",
       url: "https://www.codility.com/",
+      image: "/DevloppeurX.jpeg",
     },
 
     {
@@ -120,12 +140,14 @@ function Recruteurs() {
       description:
         "Les outils de vidéoconférence comme Zoom, Microsoft Teams, Google Meet et Whereby sont utilisés pour réaliser des entretiens à distance.",
       url: "https://zoom.us/",
+      image: "/microsoft.png",
     },
     {
       titre: "Outils de communication et collaboration interne",
       description:
         "Les outils comme Slack et Microsoft Teams facilitent la communication et la collaboration entre recruteurs et équipes techniques.",
       url: "https://slack.com/",
+      image: "/Un_developpeur.png",
     },
   ];
 
@@ -235,12 +257,9 @@ function Recruteurs() {
     },
   ];
   let box6 = [
-     { image: "/Codeur-logo.png", 
-      lien: "https://www.codeur.com/" },
+    { image: "/Codeur-logo.png", lien: "https://www.codeur.com/" },
 
-    { image: "/Freelancer.webp",
-       lien: "https://www.freelancer.com/" },
-   
+    { image: "/Freelancer.webp", lien: "https://www.freelancer.com/" },
 
     {
       image: "/Fiverr.png",
@@ -276,7 +295,6 @@ function Recruteurs() {
     },
   ];
 
-
   return (
     <>
       <div className="les_recruteurs">
@@ -286,11 +304,11 @@ function Recruteurs() {
           width="400px"
           height="400px"
         />
-        <h1 className="h1_recruteurs_static">
-          Les recruteurs
-        </h1>
+        <h1 className="h1_recruteurs_static">Les recruteurs</h1>
         <h3 className="h3_recruteurs_static">
-          Le recruteur est un professionnel qui identifie et sélectionne les meilleurs profils pour répondre aux besoins d'une entreprise, notamment dans le secteur tech.
+          Le recruteur est un professionnel qui identifie et sélectionne les
+          meilleurs profils pour répondre aux besoins d'une entreprise,
+          notamment dans le secteur tech.
         </h3>
       </div>
 
@@ -324,7 +342,9 @@ function Recruteurs() {
 
       <div className="div_recruter">
         <h2 className="titre-outils-recruteurs-static">
-          Les outils couramment utilisés par les recruteurs pour le recrutement des développeurs
+          Les outils couramment utilisés par les recruteurs pour le recrutement
+          des développeurs
+          <span className="main-pointeuse-recruteur">👇</span>
         </h2>
       </div>
 
@@ -335,13 +355,14 @@ function Recruteurs() {
             titre={valeur.titre}
             description={valeur.description}
             url={valeur.url}
+            image={valeur.image}
           />
         ))}
       </div>
 
       <div>
-        <p className="p_recruteurs1">
-          Découvrez une sélection des sites freelance pour trouver des missions ou
+        <p className="p_recruteurs1 texte-blanc-freelance">
+          Découvrez une sélection des sites freelance
         </p>
       </div>
       <div className="Recruteurs1">
@@ -353,7 +374,6 @@ function Recruteurs() {
           />
         ))}
       </div>
-
     </>
   );
 }

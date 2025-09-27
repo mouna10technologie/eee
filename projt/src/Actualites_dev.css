@@ -518,6 +518,94 @@
   overflow-x: hidden;
 }
 
+/* Styles pour les cartes d'actualités avec images */
+.div_actualités {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
+  border-radius: 16px;
+  padding: 0;
+  margin: 1rem;
+  width: 320px;
+  min-height: 400px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.div_actualités:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+  border-color: rgba(102, 126, 234, 0.3);
+}
+
+.image-actualites-container {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  border-radius: 16px 16px 0 0;
+  position: relative;
+}
+
+.image-actualites {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.div_actualités:hover .image-actualites {
+  transform: scale(1.1);
+}
+
+.contenu-actualites {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.contenu-actualites h2 {
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  line-height: 1.3;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.contenu-actualites h4 {
+  color: #d0d0d0;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0 0 1.5rem 0;
+  flex: 1;
+}
+
+.btn-carte-actualite {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.8rem 1.2rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: auto;
+}
+
+.btn-carte-actualite:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+  background: linear-gradient(45deg, #7c8ef0, #8a5bb8);
+}
+
 /* Responsive design */
 @media (max-width: 1200px) {
   .grille-actualites {
@@ -608,29 +696,7 @@
 
 .h3_actualités_static:hover {
   color: #40E0D0; /* cyan plus clair au survol */
-  transform: translateY(-2px);
-  transition: all 0.3s ease;
-}
-
 /* Titre des actualités récentes */
-.titre-actualites-recentes-static {
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
-  font-weight: 600;
-  font-family: Georgia, "Times New Roman", Times, serif;
-  line-height: 1.4;
-  margin: 3rem auto 2rem auto;
-  max-width: 800px;
-  padding: 0 1rem;
-  color: #00FFFF; /* cyan lumineux */
-  text-shadow: 0 2px 4px rgba(0, 255, 255, 0.3);
-  text-align: center;
-  position: relative;
-}
-
-.titre-actualites-recentes-static:hover {
-  color: #40E0D0; /* cyan plus clair au survol */
-  transform: translateY(-2px);
-  transition: all 0.3s ease;
 }
 
 /* ===== RESPONSIVE POUR LES STYLES CYAN ACTUALITÉS ===== */
@@ -671,6 +737,11 @@
     font-size: clamp(1rem, 2vw, 1.3rem);
     margin: 2rem auto 1rem auto;
   }
+  
+  .main-pointeuse {
+    font-size: 2rem;
+    margin-left: 0.5rem;
+  }
 }
 
 /* Titre des outils et ressources statique avec couleur jaune lumineux */
@@ -692,6 +763,25 @@
   color: #FFED4E; /* jaune plus vif au survol */
   transform: translateY(-2px);
   transition: all 0.3s ease;
+}
+
+.main-pointeuse {
+  display: inline-block;
+  font-size: 2.5rem;
+  margin-left: 1rem;
+  color: #FFD700; /* jaune doré */
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6));
+  animation: pointeAnime 2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes pointeAnime {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(10px) scale(1.1);
+  }
 }
 
 /* ===== BOUTON POUR LES CARTES ACTUALITÉS ===== */

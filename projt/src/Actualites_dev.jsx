@@ -1,6 +1,6 @@
 import "./Actualites_dev.css";
 
-function CarteActualités({ titre, description, url }) {
+function CarteActualités({ titre, description, url, image }) {
   const handleClick = () => {
     if (url) {
       window.open(url, "_blank", "noopener,noreferrer");
@@ -9,13 +9,20 @@ function CarteActualités({ titre, description, url }) {
 
   return (
     <div className="div_actualités">
-      <h2>{titre}</h2>
-      <h4>{description}</h4>
-      {url && (
-        <button className="btn-carte-actualite" onClick={handleClick}>
-          Visiter le site
-        </button>
+      {image && (
+        <div className="image-actualites-container">
+          <img src={image} alt={titre} className="image-actualites" />
+        </div>
       )}
+      <div className="contenu-actualites">
+        <h2>{titre}</h2>
+        <h4>{description}</h4>
+        {url && (
+          <button className="btn-carte-actualite" onClick={handleClick}>
+            Visiter le site
+          </button>
+        )}
+      </div>
     </div>
   );
 }
@@ -93,42 +100,49 @@ function Actualites_dev() {
       description:
         "Sites comme Hacker News, Reddit (r/programming, r/webdev...), Medium, Dev.to et Hashnode offrent des actualités tech, des discussions, des articles et des tutoriels pour les développeurs..",
       url: "https://news.ycombinator.com/",
+      image: "/news-technology.webp",
     },
     {
       titre: "Newsletters Tech populaires",
       description:
         "Des newsletters comme JavaScript Weekly, Frontend Focus, TLDR ou The Pragmatic Engineer offrent un résumé régulier de l'actualité tech, du développement web, de l'IA et des tendances du secteur.",
       url: "https://javascriptweekly.com/",
+      image: "/Developeurs.png",
     },
     {
       titre: "Podcasts pour développeurs",
       description:
         "Les podcasts comme Syntax.fm, CodeNewbie, Developer Tea, The Changelog et Command Line Heroes permettent aux développeurs de rester informés sur le frontend, les projets open source, les carrières tech et l'histoire de la technologie.",
       url: "https://syntax.fm/",
+      image: "/DevloppeurX.jpeg",
     },
     {
       titre: "Chaînes YouTube",
       description:
         "Des chaînes YouTube comme Fireship, The Net Ninja, Traversy Media ou TechWorld with Nana proposent des vidéos pédagogiques et actuelles sur le développement, le DevOps, et les technologies cloud.",
       url: "https://www.youtube.com/@Fireship",
+      image: "/google.webp",
     },
     {
       titre: "Communautés / Forums",
       description:
         "Des communautés comme Stack Overflow, Discord, GitHub Trending et Twitter/X permettent de suivre les tendances, échanger avec d'autres développeurs et découvrir des projets ou contenus populaires..",
       url: "https://stackoverflow.com/",
+      image: "/Un_developpeur.png",
     },
     {
       titre: "Conférences et événements",
       description:
         "Des conférences comme Google I/O, WWDC, JSConf ou des meetups locaux permettent de découvrir les nouveautés tech, approfondir des sujets spécialisés et rencontrer la communauté.",
       url: "https://events.google.com/io/",
+      image: "/Technologie.jpeg",
     },
     {
       titre: "Outils de veille tech automatisée",
       description:
         "Des outils comme Feedly, Daily.dev, Pocket et GitHub permettent d'automatiser la veille tech en centralisant, sauvegardant et suivant les contenus et projets pertinents.",
       url: "https://daily.dev/",
+      image: "/ai3.jpg",
     },
   ];
 
@@ -266,6 +280,7 @@ function Actualites_dev() {
       <div className="div_actuel">
         <h2 className="titre-outils-actualites-static">
           Les outils et ressources que les développeurs utilisent pour rester à jour
+          <span className="main-pointeuse">👇</span>
         </h2>
       </div>
 
@@ -276,6 +291,7 @@ function Actualites_dev() {
             titre={valeur.titre}
             description={valeur.description}
             url={valeur.url}
+            image={valeur.image}
           />
         ))}
       </div>
