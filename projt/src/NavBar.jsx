@@ -2,10 +2,17 @@ import { Link } from "react-router-dom";
 import "./NavBar.css";
 
 function NavBar() {
+  const handleClick = () => {
+    window.scrollTo(0, 0);
+  };
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <Link to="/Futuriste" className="logo" aria-label="Aller à la page Futuriste">
+        <Link
+          to="/Futuriste"
+          className="logo"
+          aria-label="Aller à la page Futuriste"
+        >
           <span className="logo-icon">
             <img
               src="/LogoDev-job2.jpg"
@@ -23,32 +30,40 @@ function NavBar() {
 
       <ul className="navbar-menu">
         <li className="navbar-item">
-          <Link to="/" className="navbar-link">
+          <Link to="/" onClick={handleClick} className="navbar-link">
             Accueil
           </Link>
         </li>
         <li className="navbar-item">
-          <Link to="/Developpeurs" className="navbar-link">
+          <Link
+            to="/Developpeurs"
+            onClick={handleClick}
+            className="navbar-link"
+          >
             Développeurs
           </Link>
         </li>
         <li className="navbar-item">
-          <Link to="/Recruteurs" className="navbar-link">
+          <Link to="/Recruteurs" onClick={handleClick} className="navbar-link">
             Recruteurs
           </Link>
         </li>
         <li className="navbar-item">
-          <Link to="/Actualites_dev" className="navbar-link">
+          <Link
+            to="/Actualites_dev"
+            onClick={handleClick}
+            className="navbar-link"
+          >
             Actualités Dev
           </Link>
         </li>
         <li className="navbar-item">
-          <Link to="/IA" className="navbar-link">
+          <Link to="/IA" onClick={handleClick} className="navbar-link">
             IA
           </Link>
         </li>
         <li className="navbar-item">
-          <Link to="/Contact" className="navbar-link">
+          <Link to="/Contact" onClick={handleClick} className="navbar-link">
             Contact
           </Link>
         </li>

@@ -130,17 +130,37 @@
     text-shadow: 0 0 20px rgba(255, 215, 0, 0.9),
       0 0 30px rgba(255, 215, 0, 0.7), 0 0 40px rgba(255, 215, 0, 0.5);
   }
-  75% {
-    text-shadow: 0 0 15px rgba(118, 75, 162, 0.9),
-      0 0 25px rgba(118, 75, 162, 0.7), 0 0 35px rgba(118, 75, 162, 0.5);
-  }
 }
 
 .sous-titre-actualites {
-  font-size: 1.2rem;
-  color: #b0b0b0;
-  font-weight: 300;
-  letter-spacing: 0.5px;
+  font-size: 1.4rem !important;
+  color: #ffffff !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.8px !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+  margin: 0 0 3rem 0 !important;
+  text-align: center !important;
+  line-height: 1.4 !important;
+}
+
+/* ===== AMÉLIORATION VISIBILITÉ TITRE PRINCIPAL ACTUALITÉS ===== */
+.titre-actualites-recentes-static {
+  font-size: clamp(2rem, 4vw, 2.8rem) !important;
+  font-weight: 700 !important;
+  font-family: "Arial", sans-serif !important;
+  color: #00FFFF !important; /* cyan lumineux */
+  text-shadow: 0 4px 8px rgba(0, 255, 255, 0.5) !important;
+  margin: 3rem 0 1.5rem 0 !important;
+  text-align: center !important;
+  position: relative !important;
+  z-index: 2 !important;
+  line-height: 1.2 !important;
+}
+
+.titre-actualites-recentes-static:hover {
+  color: #40E0D0 !important;
+  transform: translateY(-2px) !important;
+  transition: all 0.3s ease !important;
 }
 
 .grille-actualites {
