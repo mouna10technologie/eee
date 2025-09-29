@@ -22,8 +22,12 @@ function NavBar() {
             />
           </span>
           <span className="logo-text">
-            <span className="logo-dev">Dev</span>
-            <span className="logo-job">Job</span>
+            <span onClick={handleClick} className="logo-dev">
+              Dev
+            </span>
+            <span onClick={handleClick} className="logo-job">
+              Job
+            </span>
           </span>
         </Link>
       </div>
