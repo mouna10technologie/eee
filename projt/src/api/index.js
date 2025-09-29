@@ -10,6 +10,8 @@ export * from './formulaireCandidat.api';
 export * from './jobs.api';
 export * from './aiJobSearch.api';
 export * from './newsletter.api';
+export * from './auth.api';
+export * from './cv.api';
 
 // Configuration globale pour toutes les APIs
 export const API_CONFIG = {

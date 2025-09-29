@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const Candidature = require("../models/Candidature");
+const auth = require("../middlewares/auth");
 
 // Configuration du stockage pour le fichier CV
 const storage = multer.diskStorage({
@@ -26,8 +27,8 @@ router.post("/", upload.single("cv"), async (req, res) => {
   }
 });
 
-// 📄 GET: Toutes les candidatures
-router.get("/", async (req, res) => {
+// 📄 GET: Toutes les candidatures (protégé)
+router.get("/", auth, async (req, res) => {
   try {
     const candidatures = await Candidature.find().sort({ createdAt: -1 });
     res.json(candidatures);
@@ -36,8 +37,8 @@ router.get("/", async (req, res) => {
   }
 });
 
-// 🔍 GET: Une candidature
-router.get("/:id", async (req, res) => {
+// 🔍 GET: Une candidature (protégé)
+router.get("/:id", auth, async (req, res) => {
   try {
     const candidature = await Candidature.findById(req.params.id);
     if (!candidature) return res.status(404).json({ error: "Non trouvé" });

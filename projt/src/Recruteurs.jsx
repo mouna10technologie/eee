@@ -1,4 +1,15 @@
+import React, { useEffect, useState } from "react";
 import "./Recruteurs.css";
+import {
+  loginRecruiter,
+  registerRecruiter,
+  logoutRecruiter,
+  isAuthenticated,
+  getUser,
+  getAllCV,
+  getCVDownloadUrl,
+  getCVStats,
+} from "./api";
 function CarteRecruteurs1({ image, lien }) {
   return (
     <div className="div_reruteurs1">
@@ -109,6 +120,129 @@ function CarteSiteRecrutement({
 }
 
 function Recruteurs() {
+  const [loggedIn, setLoggedIn] = useState(isAuthenticated());
+  const [currentUser, setCurrentUser] = useState(getUser());
+  const [showLogin, setShowLogin] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
+  const [showCVList, setShowCVList] = useState(false);
+  
+  // Formulaires
+  const [loginForm, setLoginForm] = useState({ email: "", password: "" });
+  const [registerForm, setRegisterForm] = useState({ name: "", address: "", email: "", password: "" });
+  
+  // États
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [cvList, setCvList] = useState([]);
+  const [stats, setStats] = useState(null);
+
+  const fetchCV = async () => {
+    try {
+      setLoading(true);
+      setError("");
+      const data = await getAllCV();
+      setCvList(data?.data || []);
+      setShowCVList(true);
+    } catch (e) {
+      setError(e.message || "Impossible de récupérer les CV");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchStats = async () => {
+    try {
+      const data = await getCVStats();
+      setStats(data?.stats || null);
+    } catch (e) {
+      console.error('Erreur stats:', e);
+    }
+  };
+
+  const handleLogin = async (e) => {
+    e?.preventDefault();
+    try {
+      setLoading(true);
+      setError("");
+      const res = await loginRecruiter(loginForm.email, loginForm.password);
+      if (res?.success) {
+        setLoggedIn(true);
+        setCurrentUser(res.recruiter);
+        setShowLogin(false);
+        setLoginForm({ email: "", password: "" });
+        await fetchStats();
+      } else {
+        setError(res?.error || "Identifiants invalides");
+      }
+    } catch (e2) {
+      if (e2.message.includes('404')) {
+        setError("❌ Email non trouvé. Vérifiez votre adresse email ou inscrivez-vous.");
+      } else if (e2.message.includes('401')) {
+        setError("❌ Mot de passe incorrect. Vérifiez votre mot de passe.");
+      } else if (e2.message.includes('400')) {
+        setError("❌ Email ou mot de passe manquant. Remplissez tous les champs.");
+      } else {
+        setError("❌ Erreur de connexion: " + (e2.message || "Problème de réseau"));
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRegister = async (e) => {
+    e?.preventDefault();
+    try {
+      setLoading(true);
+      setError("");
+      const res = await registerRecruiter(registerForm);
+      if (res?.success) {
+        setSuccess("✅ Inscription réussie ! Vous êtes maintenant connecté et pouvez accéder aux CV.");
+        setLoggedIn(true);
+        setCurrentUser(res.recruiter);
+        setShowRegister(false);
+        setRegisterForm({ name: "", address: "", email: "", password: "" });
+        await fetchStats();
+      } else {
+        setError(res?.error || "Erreur lors de l'inscription");
+      }
+    } catch (e2) {
+      if (e2.message.includes('409')) {
+        setError("❌ Cet email est déjà utilisé. Utilisez un autre email ou connectez-vous.");
+      } else if (e2.message.includes('400')) {
+        setError("❌ Informations manquantes. Remplissez tous les champs (nom, email, mot de passe).");
+      } else {
+        setError("❌ Erreur lors de l'inscription: " + (e2.message || "Problème de réseau"));
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleLogout = () => {
+    logoutRecruiter();
+    setLoggedIn(false);
+    setCurrentUser(null);
+    setCvList([]);
+    setStats(null);
+    setShowCVList(false);
+  };
+
+  const resetForms = () => {
+    setShowLogin(false);
+    setShowRegister(false);
+    setError("");
+    setSuccess("");
+    setLoginForm({ email: "", password: "" });
+    setRegisterForm({ name: "", address: "", email: "", password: "" });
+  };
+
+  useEffect(() => {
+    if (loggedIn && !stats) {
+      fetchStats();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loggedIn]);
   let box2 = [
     {
       titre: "Plateformes de sourcing et publication d'offres",
@@ -310,6 +444,211 @@ function Recruteurs() {
           meilleurs profils pour répondre aux besoins d'une entreprise,
           notamment dans le secteur tech.
         </h3>
+
+        {/* 🎯 ESPACE RECRUTEUR - Authentification & Accès CV */}
+        <div style={{
+          backgroundColor: "#f8f9fa",
+          border: "2px solid #007bff",
+          borderRadius: "12px",
+          padding: "25px",
+          margin: "30px 20px",
+          boxShadow: "0 4px 8px rgba(0,0,0,0.1)"
+        }}>
+          <h2 style={{ color: "#007bff", marginBottom: "20px", textAlign: "center" }}>
+            🎯 Espace Recruteur
+          </h2>
+
+          {!loggedIn ? (
+            // Interface non connecté
+            <div>
+              <div style={{ display: "flex", gap: "15px", justifyContent: "center", marginBottom: "20px", flexWrap: "wrap" }}>
+                <button 
+                  onClick={() => { resetForms(); setShowLogin(true); }}
+                  className="btn-carte-recruteur"
+                  style={{ backgroundColor: "#007bff", color: "white", padding: "12px 24px" }}
+                >
+                  🔐 Se connecter
+                </button>
+                <button 
+                  onClick={() => { resetForms(); setShowRegister(true); }}
+                  className="btn-carte-recruteur"
+                  style={{ backgroundColor: "#28a745", color: "white", padding: "12px 24px" }}
+                >
+                  ✍️ S'inscrire
+                </button>
+              </div>
+
+              {/* Formulaire de connexion */}
+              {showLogin && (
+                <form onSubmit={handleLogin} style={{ 
+                  backgroundColor: "white", 
+                  padding: "20px", 
+                  borderRadius: "8px", 
+                  border: "1px solid #ddd",
+                  marginBottom: "15px"
+                }}>
+                  <h3 style={{ marginBottom: "15px", color: "#007bff" }}>🔐 Connexion Recruteur</h3>
+                  <div style={{ marginBottom: "15px" }}>
+                    <input
+                      type="email"
+                      placeholder="Email"
+                      value={loginForm.email}
+                      onChange={(e) => setLoginForm({...loginForm, email: e.target.value})}
+                      required
+                      style={{ width: "100%", padding: "10px", borderRadius: "4px", border: "1px solid #ccc" }}
+                    />
+                  </div>
+                  <div style={{ marginBottom: "15px" }}>
+                    <input
+                      type="password"
+                      placeholder="Mot de passe"
+                      value={loginForm.password}
+                      onChange={(e) => setLoginForm({...loginForm, password: e.target.value})}
+                      required
+                      style={{ width: "100%", padding: "10px", borderRadius: "4px", border: "1px solid #ccc" }}
+                    />
+                  </div>
+                  <div style={{ display: "flex", gap: "10px" }}>
+                    <button type="submit" disabled={loading} className="btn-carte-recruteur">
+                      {loading ? "Connexion..." : "Se connecter"}
+                    </button>
+                    <button type="button" onClick={resetForms} className="btn-carte-recruteur">
+                      Annuler
+                    </button>
+                  </div>
+                </form>
+              )}
+
+              {/* Formulaire d'inscription */}
+              {showRegister && (
+                <form onSubmit={handleRegister} style={{ 
+                  backgroundColor: "white", 
+                  padding: "20px", 
+                  borderRadius: "8px", 
+                  border: "1px solid #ddd",
+                  marginBottom: "15px"
+                }}>
+                  <h3 style={{ marginBottom: "15px", color: "#28a745" }}>✍️ Inscription Recruteur</h3>
+                  <div style={{ marginBottom: "15px" }}>
+                    <input
+                      type="text"
+                      placeholder="Nom du recruteur"
+                      value={registerForm.name}
+                      onChange={(e) => setRegisterForm({...registerForm, name: e.target.value})}
+                      required
+                      style={{ width: "100%", padding: "10px", borderRadius: "4px", border: "1px solid #ccc" }}
+                    />
+                  </div>
+                  <div style={{ marginBottom: "15px" }}>
+                    <input
+                      type="text"
+                      placeholder="Adresse du recruteur"
+                      value={registerForm.address}
+                      onChange={(e) => setRegisterForm({...registerForm, address: e.target.value})}
+                      required
+                      style={{ width: "100%", padding: "10px", borderRadius: "4px", border: "1px solid #ccc" }}
+                    />
+                  </div>
+                  <div style={{ marginBottom: "15px" }}>
+                    <input
+                      type="email"
+                      placeholder="Email"
+                      value={registerForm.email}
+                      onChange={(e) => setRegisterForm({...registerForm, email: e.target.value})}
+                      required
+                      style={{ width: "100%", padding: "10px", borderRadius: "4px", border: "1px solid #ccc" }}
+                    />
+                  </div>
+                  <div style={{ marginBottom: "15px" }}>
+                    <input
+                      type="password"
+                      placeholder="Mot de passe (min. 6 caractères)"
+                      value={registerForm.password}
+                      onChange={(e) => setRegisterForm({...registerForm, password: e.target.value})}
+                      required
+                      minLength="6"
+                      style={{ width: "100%", padding: "10px", borderRadius: "4px", border: "1px solid #ccc" }}
+                    />
+                  </div>
+                  <div style={{ display: "flex", gap: "10px" }}>
+                    <button type="submit" disabled={loading} className="btn-carte-recruteur">
+                      {loading ? "Inscription..." : "S'inscrire"}
+                    </button>
+                    <button type="button" onClick={resetForms} className="btn-carte-recruteur">
+                      Annuler
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
+          ) : (
+            // Interface connecté
+            <div>
+              <div style={{ textAlign: "center", marginBottom: "20px" }}>
+                <p style={{ fontSize: "18px", marginBottom: "15px" }}>
+                  👋 Bienvenue <strong>{currentUser?.name}</strong> !
+                </p>
+                {stats && (
+                  <div style={{ 
+                    backgroundColor: "white", 
+                    padding: "15px", 
+                    borderRadius: "8px", 
+                    marginBottom: "15px",
+                    border: "1px solid #ddd"
+                  }}>
+                    <p><strong>📊 Statistiques:</strong> {stats.totalCV} CV disponibles sur {stats.totalCandidatures} candidatures</p>
+                  </div>
+                )}
+              </div>
+              
+              <div style={{ display: "flex", gap: "15px", justifyContent: "center", flexWrap: "wrap" }}>
+                <button 
+                  onClick={fetchCV}
+                  disabled={loading}
+                  className="btn-carte-recruteur"
+                  style={{ backgroundColor: "#17a2b8", color: "white", padding: "12px 24px" }}
+                >
+                  {loading ? "Chargement..." : "📋 Voir les CV"}
+                </button>
+                <button 
+                  onClick={handleLogout}
+                  className="btn-carte-recruteur"
+                  style={{ backgroundColor: "#dc3545", color: "white", padding: "12px 24px" }}
+                >
+                  🚪 Se déconnecter
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Messages d'erreur */}
+          {error && (
+            <div style={{ 
+              backgroundColor: "#f8d7da", 
+              color: "#721c24", 
+              padding: "12px", 
+              borderRadius: "4px", 
+              marginTop: "15px",
+              border: "1px solid #f5c6cb"
+            }}>
+              {error}
+            </div>
+          )}
+
+          {/* Messages de succès */}
+          {success && (
+            <div style={{ 
+              backgroundColor: "#d4edda", 
+              color: "#155724", 
+              padding: "12px", 
+              borderRadius: "4px", 
+              marginTop: "15px",
+              border: "1px solid #c3e6cb"
+            }}>
+              {success}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Section des sites de recrutement */}
@@ -374,6 +713,124 @@ function Recruteurs() {
           />
         ))}
       </div>
+
+      {/* 📋 Section CV - Affichage sécurisé des CV */}
+      {loggedIn && showCVList && (
+        <div style={{
+          backgroundColor: "#f8f9fa",
+          border: "2px solid #17a2b8",
+          borderRadius: "12px",
+          padding: "25px",
+          margin: "30px 20px",
+          boxShadow: "0 4px 8px rgba(0,0,0,0.1)"
+        }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
+            <h2 style={{ color: "#17a2b8", margin: 0 }}>📋 Liste des CV</h2>
+            <button 
+              onClick={() => setShowCVList(false)}
+              style={{ 
+                backgroundColor: "#6c757d", 
+                color: "white", 
+                border: "none", 
+                padding: "8px 16px", 
+                borderRadius: "4px",
+                cursor: "pointer"
+              }}
+            >
+              ✖️ Fermer
+            </button>
+          </div>
+
+          {loading && (
+            <div style={{ textAlign: "center", padding: "20px" }}>
+              <p>🔄 Chargement des CV...</p>
+            </div>
+          )}
+
+          {!loading && cvList.length === 0 && (
+            <div style={{ textAlign: "center", padding: "20px", backgroundColor: "white", borderRadius: "8px" }}>
+              <p>📭 Aucun CV disponible pour le moment.</p>
+            </div>
+          )}
+
+          {!loading && cvList.length > 0 && (
+            <div style={{ display: "grid", gap: "15px" }}>
+              {cvList.map((candidat) => (
+                <div key={candidat._id} style={{
+                  backgroundColor: "white",
+                  border: "1px solid #ddd",
+                  borderRadius: "8px",
+                  padding: "20px",
+                  boxShadow: "0 2px 4px rgba(0,0,0,0.05)"
+                }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "15px" }}>
+                    <div style={{ flex: 1 }}>
+                      <h3 style={{ margin: "0 0 10px 0", color: "#007bff" }}>
+                        👤 {candidat.prenom} {candidat.nom}
+                      </h3>
+                      <div style={{ marginBottom: "8px" }}>
+                        <strong>📧 Email:</strong> {candidat.email || "Non renseigné"}
+                      </div>
+                      <div style={{ marginBottom: "8px" }}>
+                        <strong>💼 Poste visé:</strong> {candidat.posteChoisi || "Non spécifié"}
+                      </div>
+                      <div style={{ marginBottom: "8px" }}>
+                        <strong>🎓 Niveau d'étude:</strong> {candidat.niveauEtude || "Non renseigné"}
+                      </div>
+                      <div style={{ marginBottom: "8px" }}>
+                        <strong>👥 Situation:</strong> {candidat.situationFamiliale || "Non renseignée"}
+                      </div>
+                      <div style={{ fontSize: "12px", color: "#6c757d" }}>
+                        📅 Candidature déposée le: {new Date(candidat.createdAt).toLocaleDateString('fr-FR')}
+                      </div>
+                    </div>
+                    
+                    <div style={{ display: "flex", flexDirection: "column", gap: "10px", alignItems: "flex-end" }}>
+                      {candidat.cv ? (
+                        <a 
+                          href={getCVDownloadUrl(candidat.cv)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{
+                            backgroundColor: "#28a745",
+                            color: "white",
+                            padding: "10px 20px",
+                            borderRadius: "6px",
+                            textDecoration: "none",
+                            fontWeight: "bold",
+                            textAlign: "center",
+                            minWidth: "150px"
+                          }}
+                        >
+                          📄 Télécharger CV
+                        </a>
+                      ) : (
+                        <div style={{
+                          backgroundColor: "#ffc107",
+                          color: "#856404",
+                          padding: "10px 20px",
+                          borderRadius: "6px",
+                          fontWeight: "bold",
+                          textAlign: "center",
+                          minWidth: "150px"
+                        }}>
+                          ⚠️ Pas de CV
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div style={{ textAlign: "center", marginTop: "20px", padding: "15px", backgroundColor: "white", borderRadius: "8px" }}>
+            <p style={{ margin: 0, color: "#6c757d" }}>
+              📊 <strong>{cvList.length}</strong> CV{cvList.length > 1 ? 's' : ''} affiché{cvList.length > 1 ? 's' : ''}
+            </p>
+          </div>
+        </div>
+      )}
     </>
   );
 }

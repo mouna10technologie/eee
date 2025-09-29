@@ -32,9 +32,11 @@ router.post('/subscribe', async (req, res) => {
           subscriber: existingSubscriber
         });
       } else {
-        return res.status(409).json({
-          success: false,
-          error: 'Cet email est déjà abonné à notre newsletter'
+        // Email déjà abonné et actif - retourner succès au lieu d'erreur
+        return res.status(200).json({
+          success: true,
+          message: 'Vous êtes déjà abonné à notre newsletter !',
+          subscriber: existingSubscriber
         });
       }
     }
@@ -64,9 +66,9 @@ router.post('/subscribe', async (req, res) => {
     console.error('Erreur lors de l\'abonnement newsletter:', error);
     
     if (error.code === 11000) {
-      return res.status(409).json({
-        success: false,
-        error: 'Cet email est déjà abonné'
+      return res.status(200).json({
+        success: true,
+        message: 'Vous êtes déjà abonné à notre newsletter !'
       });
     }
     
