@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
 import "./Candidat.css";
 import { submitCandidature } from "./api/candidat.api";
 
 function Candidat() {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
   const [formData, setFormData] = useState({
     nom: "",
     prenom: "",
@@ -90,24 +95,29 @@ function Candidat() {
 
     if (Object.keys(newErrors).length === 0) {
       setIsSubmitting(true);
-      
+
       try {
         // Créer FormData pour l'envoi
         const formDataToSend = new FormData();
         formDataToSend.append("nom", formData.nom);
         formDataToSend.append("prenom", formData.prenom);
-        formDataToSend.append("situationFamiliale", formData.situationFamiliale);
+        formDataToSend.append(
+          "situationFamiliale",
+          formData.situationFamiliale
+        );
         formDataToSend.append("niveauEtude", formData.niveauEtude);
         formDataToSend.append("posteChoisi", formData.posteChoisi);
-        
+
         if (formData.cv) {
           formDataToSend.append("cv", formData.cv);
         }
 
         const result = await submitCandidature(formDataToSend);
-        setSubmitMessage("🎉 Félicitations ! Votre candidature a été soumise avec succès !");
+        setSubmitMessage(
+          "🎉 Félicitations ! Votre candidature a été soumise avec succès !"
+        );
         setMessageType("success");
-        
+
         // Reset form
         setFormData({
           nom: "",
@@ -117,25 +127,25 @@ function Candidat() {
           posteChoisi: "",
           cv: null,
         });
-        
+
         // Reset file input
-        const fileInput = document.getElementById('cv');
+        const fileInput = document.getElementById("cv");
         if (fileInput) {
-          fileInput.value = '';
+          fileInput.value = "";
         }
-        
+
         // Effacer le message après 8 secondes
         setTimeout(() => {
           setSubmitMessage("");
           setMessageType("");
         }, 8000);
-        
+
         console.log("Candidature soumise:", result);
       } catch (error) {
         console.error("Erreur:", error);
         setSubmitMessage("❌ Erreur lors de la soumission: " + error.message);
         setMessageType("error");
-        
+
         // Effacer le message d'erreur après 5 secondes
         setTimeout(() => {
           setSubmitMessage("");
@@ -297,12 +307,14 @@ function Candidat() {
           </div>
 
           <div className="form-actions">
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className={`submit-button ${isSubmitting ? "submitting" : ""}`}
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Soumission en cours..." : "Soumettre ma candidature"}
+              {isSubmitting
+                ? "Soumission en cours..."
+                : "Soumettre ma candidature"}
             </button>
           </div>
 
